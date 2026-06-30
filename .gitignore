@@ -5,3 +5,6 @@
 .project/project.eden.new
 manifest.blk
 .mcp.json
+plugin.das_project
+project.code-workspace
+.cursorrules
