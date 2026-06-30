@@ -1,4 +1,7 @@
 **/*.eden
 **/*.eden.*
+**/*.meta
 .project/cache
 .project/project.eden.new
+manifest.blk
+.mcp.json

@@ -1,8 +1,0 @@
-guid:t="019f0fca-9d2d-7a84-a2e3-517b7fedc92e"
-assetType:i=0
-filter:t="Bilinear"
-addressing:t="Wrap"
-anisotropicLevel:i=4
-sRGB:b=yes
-generateMipLevels:b=yes
-format:t="A8R8G8B8"
