@@ -1,0 +1,4 @@
+**/*.eden
+**/*.eden.*
+.project/cache
+.project/project.eden.new

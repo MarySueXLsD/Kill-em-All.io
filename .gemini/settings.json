@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "EdenSpark": {
+      "httpUrl": "http://localhost:54300/mcp"
+    },
+    "context7": {
+      "httpUrl": "https://mcp.context7.com/mcp"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+guid:t="019ed1d6-9a09-78d9-97af-2d58d476c24b"
+assetType:i=0
+filter:t="Point"
+addressing:t="Clamp"
+anisotropicLevel:i=1
+sRGB:b=yes
+generateMipLevels:b=no
+format:t="A8R8G8B8"

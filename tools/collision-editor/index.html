@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collision Editor — Kill'em All</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #12141a;
+      --panel: #1c2030;
+      --border: #343a50;
+      --accent: #5a9fd4;
+      --accent-dim: #3d6f96;
+      --text: #e4e8f0;
+      --text-dim: #8a92a8;
+      --line: #e85d5d;
+      --node: #f0a060;
+      --feet: #60e8a0;
+      --danger: #c05050;
+    }
+    html, body { height: 100%; overflow: hidden; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    #app { display: grid; grid-template-columns: 300px 1fr; height: 100vh; }
+    #sidebar { background: var(--panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+    #sidebar header { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+    #sidebar header h1 { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+    #sidebar header p { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
+    .section { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+    .section h2 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 6px; }
+    input[type="text"], select {
+      width: 100%; padding: 6px 8px; background: rgba(0,0,0,0.35); border: 1px solid var(--border);
+      border-radius: 4px; color: var(--text); font-size: 12px;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--accent-dim); }
+    label.row { display: flex; align-items: center; gap: 8px; font-size: 12px; cursor: pointer; margin: 4px 0; }
+    .btn {
+      width: 100%; padding: 7px 10px; margin-bottom: 5px; background: rgba(90,159,212,0.12);
+      border: 1px solid var(--accent-dim); border-radius: 4px; color: var(--accent);
+      font-size: 12px; cursor: pointer;
+    }
+    .btn:hover { background: rgba(90,159,212,0.22); }
+    .btn.danger { border-color: var(--danger); color: var(--danger); background: rgba(192,80,80,0.1); }
+    .btn-row { display: flex; gap: 6px; }
+    .btn-row .btn { flex: 1; margin-bottom: 0; }
+    #asset-list {
+      flex: 1; overflow-y: auto; list-style: none; border-top: 1px solid var(--border);
+    }
+    #asset-list li {
+      padding: 6px 16px; font-size: 11px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; justify-content: space-between; gap: 6px;
+    }
+    #asset-list li:hover { background: rgba(255,255,255,0.04); }
+    #asset-list li.active { background: rgba(90,159,212,0.15); color: var(--accent); }
+    #asset-list li .badge {
+      font-size: 9px; padding: 1px 5px; border-radius: 3px; flex-shrink: 0;
+      background: rgba(255,255,255,0.08); color: var(--text-dim);
+    }
+    #asset-list li .badge.done { background: rgba(96,232,160,0.15); color: var(--feet); }
+    #canvas-wrap {
+      position: relative; overflow: hidden; background: #0a0c10; cursor: crosshair;
+    }
+    #canvas-wrap.panning { cursor: grabbing; }
+    canvas { display: block; image-rendering: pixelated; image-rendering: crisp-edges; }
+    #status-bar {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 12px;
+      background: rgba(18,20,26,0.9); border-top: 1px solid var(--border);
+      font-size: 11px; color: var(--text-dim); display: flex; gap: 16px; pointer-events: none;
+    }
+    #status-bar .coord { color: var(--accent); }
+    .hint { font-size: 11px; color: var(--text-dim); line-height: 1.45; margin-top: 4px; }
+    .stat { font-size: 11px; color: var(--text-dim); display: flex; justify-content: space-between; padding: 2px 0; }
+    .stat span:last-child { color: var(--text); }
+    .toast {
+      position: fixed; bottom: 36px; left: 50%; transform: translateX(-50%);
+      background: var(--panel); border: 1px solid var(--accent-dim); color: var(--accent);
+      padding: 8px 16px; border-radius: 6px; font-size: 12px; z-index: 100;
+      opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+    #file-input { display: none; }
+    .filters { display: flex; flex-direction: column; gap: 6px; }
+    #save-status { font-size: 10px; color: var(--text-dim); margin-top: 4px; }
+    #save-status.saving { color: var(--accent); }
+    #save-status.error { color: var(--danger); }
+    #save-status.saved { color: var(--feet); }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <header>
+        <h1>Collision Editor</h1>
+        <p>Kill'em All — sprite obstacle lines</p>
+        <p id="save-status">Loading…</p>
+      </header>
+
+      <div class="section filters">
+        <h2>Find asset</h2>
+        <input type="text" id="search" placeholder="Search name or path…">
+        <select id="filter-sort">
+          <option value="unedited">Unedited first</option>
+          <option value="edited">Edited first</option>
+          <option value="name">Name A–Z</option>
+          <option value="no-collision">No collision first</option>
+          <option value="has-collision">Has collision first</option>
+        </select>
+        <select id="filter-category">
+          <option value="">All categories</option>
+        </select>
+        <label class="row">
+          <input type="checkbox" id="filter-low-only">
+          <span>Low obstacles only</span>
+        </label>
+      </div>
+
+      <div class="section">
+        <h2>Asset</h2>
+        <div class="stat"><span>Current</span><span id="stat-name">—</span></div>
+        <div class="stat"><span>Prop ID</span><span id="stat-prop">—</span></div>
+        <div class="stat"><span>Segments</span><span id="stat-segs">0</span></div>
+        <div class="btn-row" style="margin-top:8px">
+          <button class="btn" id="btn-prev">← Prev</button>
+          <button class="btn" id="btn-next">Next →</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Presets</h2>
+        <select id="preset-select">
+          <option value="">— choose preset —</option>
+        </select>
+        <button class="btn" id="btn-apply-preset">Apply preset to asset</button>
+        <button class="btn" id="btn-save-preset">Save current as preset</button>
+        <button class="btn danger" id="btn-delete-preset">Delete selected preset</button>
+        <p class="hint">Presets store collision shape in normalized coordinates (0–1), so they scale to any sprite size.</p>
+      </div>
+
+      <div class="section">
+        <h2>Collision</h2>
+        <label class="row">
+          <input type="checkbox" id="chk-low">
+          <span>Low obstacle (blocks walk, projectiles pass through)</span>
+        </label>
+        <button class="btn" id="btn-close-loop">Close loop</button>
+        <button class="btn" id="btn-clear-lines">Clear lines</button>
+        <button class="btn" id="btn-set-feet">Set feet anchor (F)</button>
+        <p class="hint">Click to place collision points — each click connects to the previous point (chain). Right-click a node to delete. Esc finishes the chain. Backspace undoes last segment.</p>
+      </div>
+
+      <div class="section">
+        <h2>Data</h2>
+        <button class="btn" id="btn-save-now" style="border-color:#60e8a0;color:#60e8a0">Save now</button>
+        <button class="btn" id="btn-export">Download backup JSON</button>
+        <button class="btn" id="btn-export-das">Copy das snippet</button>
+        <button class="btn" id="btn-import">Import JSON (replace all)</button>
+        <input type="file" id="file-input" accept=".json">
+        <button class="btn danger" id="btn-mark-unedited">Mark as unedited</button>
+        <p class="hint">Changes auto-save to collision_data.json when using serve.py.</p>
+      </div>
+
+      <div class="section" style="padding-bottom:6px">
+        <h2>Assets <span id="stat-filtered" style="font-weight:normal">0</span></h2>
+      </div>
+      <ul id="asset-list"></ul>
+    </aside>
+
+    <div id="canvas-wrap">
+      <canvas id="canvas"></canvas>
+      <div id="status-bar">
+        <span>Pixel: <span class="coord" id="cursor-coord">—</span></span>
+        <span id="status-extra"></span>
+        <span>Zoom: <span id="stat-zoom">100%</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const NODE_RADIUS = 5;
+    const PROJECT_ROOT = '../../';
+    const API = 'api';
+
+    let manifest = [];
+    let collision = {};
+    let presets = [];
+    let filtered = [];
+    let currentIndex = -1;
+    let currentPath = null;
+
+    let mapImage = null;
+    let imgW = 0, imgH = 0;
+    let crop = [0, 0, 0, 0];
+
+    let nodes = [];
+    let chainActive = false;
+    let loopClosed = false;
+    let nextNodeId = 1;
+    let feetMode = false;
+
+    let zoom = 1, panX = 0, panY = 0;
+    let isPanning = false, panStart = { x: 0, y: 0 };
+    let dragNode = null, dragOffset = { x: 0, y: 0 };
+    let mouseWorld = null;
+    let hoveredNode = null;
+
+    let saveTimer = null;
+    let presetSaveTimer = null;
+    let apiAvailable = false;
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const wrap = document.getElementById('canvas-wrap');
+
+    function setSaveStatus(text, kind = '') {
+      const el = document.getElementById('save-status');
+      el.textContent = text;
+      el.className = kind;
+    }
+
+    function scheduleSave() {
+      if (!apiAvailable) {
+        setSaveStatus('Read-only — run serve.py to auto-save', 'error');
+        return;
+      }
+      setSaveStatus('Saving…', 'saving');
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(persistCollision, 400);
+    }
+
+    function schedulePresetSave() {
+      if (!apiAvailable) return;
+      clearTimeout(presetSaveTimer);
+      presetSaveTimer = setTimeout(persistPresets, 300);
+    }
+
+    async function probeApi() {
+      try {
+        const r = await fetch(`${API}/collision_data`, { method: 'GET' });
+        if (!r.ok) return false;
+        apiAvailable = true;
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    async function saveNow() {
+      saveCurrentToCollision();
+      if (!apiAvailable) await probeApi();
+      if (apiAvailable) {
+        await persistCollision();
+        return;
+      }
+      exportJson();
+      showToast('API unavailable — downloaded backup JSON instead');
+    }
+
+    async function persistCollision() {
+      try {
+        const r = await fetch(`${API}/collision_data`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(collision)
+        });
+        if (!r.ok) throw new Error('save failed');
+        setSaveStatus('Saved to collision_data.json', 'saved');
+      } catch {
+        setSaveStatus('Save failed — is serve.py running?', 'error');
+      }
+    }
+
+    async function persistPresets() {
+      try {
+        const r = await fetch(`${API}/presets`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ presets })
+        });
+        if (!r.ok) throw new Error('preset save failed');
+        setSaveStatus('Presets saved', 'saved');
+      } catch {
+        setSaveStatus('Preset save failed', 'error');
+      }
+    }
+
+    function normalizeSegments(segments, w, h) {
+      if (!w || !h) return [];
+      return segments.map(s => [s[0] / w, s[1] / h, s[2] / w, s[3] / h]);
+    }
+
+    function denormalizeSegments(normSegments, w, h) {
+      return normSegments.map(s => [
+        Math.round(s[0] * w * 10) / 10,
+        Math.round(s[1] * h * 10) / 10,
+        Math.round(s[2] * w * 10) / 10,
+        Math.round(s[3] * h * 10) / 10,
+      ]);
+    }
+
+    function slugify(name) {
+      return name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'preset';
+    }
+
+    function renderPresetSelect() {
+      const sel = document.getElementById('preset-select');
+      const current = sel.value;
+      sel.innerHTML = '<option value="">— choose preset —</option>';
+      for (const p of presets) {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.name + (p.low ? ' (low)' : '');
+        sel.appendChild(opt);
+      }
+      if (current && presets.some(p => p.id === current)) sel.value = current;
+    }
+
+    function applyPresetById(id) {
+      const preset = presets.find(p => p.id === id);
+      if (!preset || !currentPath) return;
+      const w = imgW || crop[2], h = imgH || crop[3];
+      if (!w || !h) { showToast('Image not loaded'); return; }
+
+      const data = currentData();
+      data.segments = denormalizeSegments(preset.normSegments || [], w, h);
+      data.low = !!preset.low;
+      if (preset.normFeet) {
+        data.feetPx = [
+          Math.round(preset.normFeet[0] * w * 10) / 10,
+          Math.round(preset.normFeet[1] * h * 10) / 10,
+        ];
+      }
+      data.edited = true;
+      loopClosed = !!preset.closed;
+      chainActive = false;
+      nodes = nodesFromSegments(data.segments);
+      document.getElementById('chk-low').checked = !!data.low;
+      document.getElementById('stat-segs').textContent = data.segments.length;
+      renderAssetList();
+      render();
+      scheduleSave();
+      showToast(`Applied preset: ${preset.name}`);
+    }
+
+    function saveCurrentAsPreset() {
+      const data = currentData();
+      const segs = getDisplaySegments();
+      if (!segs.length) { showToast('Draw collision lines first'); return; }
+      const name = prompt('Preset name:', 'My preset');
+      if (!name || !name.trim()) return;
+
+      const w = imgW || crop[2], h = imgH || crop[3];
+      let id = slugify(name.trim());
+      let n = 1;
+      while (presets.some(p => p.id === id)) id = slugify(name.trim()) + '_' + (++n);
+
+      presets.push({
+        id,
+        name: name.trim(),
+        low: !!data.low,
+        closed: loopClosed,
+        normSegments: normalizeSegments(segs, w, h),
+        normFeet: data.feetPx ? [data.feetPx[0] / w, data.feetPx[1] / h] : [0.5, 1],
+      });
+      renderPresetSelect();
+      document.getElementById('preset-select').value = id;
+      schedulePresetSave();
+      showToast(`Saved preset: ${name.trim()}`);
+    }
+
+    function deleteSelectedPreset() {
+      const id = document.getElementById('preset-select').value;
+      if (!id) { showToast('Select a preset to delete'); return; }
+      const preset = presets.find(p => p.id === id);
+      if (!preset || !confirm(`Delete preset "${preset.name}"?`)) return;
+      presets = presets.filter(p => p.id !== id);
+      renderPresetSelect();
+      schedulePresetSave();
+      showToast('Preset deleted');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function currentData() {
+      return currentPath ? collision[currentPath] : null;
+    }
+
+    function segmentsFromNodes(nodeList, closed = false) {
+      const segs = [];
+      for (let i = 1; i < nodeList.length; i++) {
+        const a = nodeList[i - 1], b = nodeList[i];
+        segs.push([a.x, a.y, b.x, b.y]);
+      }
+      if (closed && nodeList.length > 2) {
+        const a = nodeList[nodeList.length - 1], b = nodeList[0];
+        segs.push([a.x, a.y, b.x, b.y]);
+      }
+      return segs;
+    }
+
+    function nodesFromSegments(segments) {
+      if (!segments || !segments.length) return [];
+      const eps = 0.6;
+      const same = (p, q) => Math.hypot(p.x - q.x, p.y - q.y) < eps;
+      const out = [{ id: nextNodeId++, x: segments[0][0], y: segments[0][1] }];
+      for (const seg of segments) {
+        const end = { x: seg[2], y: seg[3] };
+        const last = out[out.length - 1];
+        if (same(end, out[0]) && out.length > 2) break;
+        if (!same(end, last)) out.push({ id: nextNodeId++, ...end });
+      }
+      return out;
+    }
+
+    function syncSegmentsToData() {
+      const data = currentData();
+      if (!data) return;
+      data.segments = segmentsFromNodes(nodes, loopClosed);
+      document.getElementById('stat-segs').textContent = data.segments.length;
+      scheduleSave();
+    }
+
+    function detectLoopClosed(segments, nodeList) {
+      return nodeList.length >= 3 && segments.length === nodeList.length;
+    }
+
+    function getDisplaySegments() {
+      const data = currentData();
+      if (chainActive) return segmentsFromNodes(nodes);
+      if (data?.segments?.length) return data.segments;
+      return segmentsFromNodes(nodes, loopClosed);
+    }
+
+    function saveCurrentToCollision() {
+      if (!currentPath) return;
+      const data = collision[currentPath];
+      data.segments = segmentsFromNodes(nodes, loopClosed);
+      data.low = document.getElementById('chk-low').checked;
+      if (nodes.length > 0 || data.segments.length > 0) data.edited = true;
+      data.feetPx = data.feetPx || [crop[2] / 2, crop[3]];
+      scheduleSave();
+    }
+
+    function screenToWorld(sx, sy) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (sx - rect.left - panX) / zoom,
+        y: (sy - rect.top - panY) / zoom
+      };
+    }
+
+    function findNodeAt(x, y, radiusPx = 12) {
+      const r = radiusPx / zoom;
+      let best = null, bestD = r;
+      for (const n of nodes) {
+        const d = Math.hypot(n.x - x, n.y - y);
+        if (d < bestD) { bestD = d; best = n; }
+      }
+      return best;
+    }
+
+    function resizeCanvas() {
+      canvas.width = wrap.clientWidth;
+      canvas.height = wrap.clientHeight;
+      fitToScreen();
+    }
+
+    function fitToScreen() {
+      if (!imgW) return;
+      const pad = 30;
+      const zw = (canvas.width - pad * 2) / imgW;
+      const zh = (canvas.height - pad * 2) / imgH;
+      zoom = Math.min(zw, zh, 8);
+      panX = (canvas.width - imgW * zoom) / 2;
+      panY = (canvas.height - imgH * zoom) / 2;
+      document.getElementById('stat-zoom').textContent = Math.round(zoom * 100) + '%';
+      render();
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      ctx.translate(panX, panY);
+      ctx.scale(zoom, zoom);
+
+      if (mapImage && mapImage.complete) {
+        const cx = crop[0] || 0, cy = crop[1] || 0;
+        ctx.drawImage(mapImage, cx, cy, imgW, imgH, 0, 0, imgW, imgH);
+      } else {
+        ctx.fillStyle = '#1a2030';
+        ctx.fillRect(0, 0, imgW || 100, imgH || 100);
+      }
+
+      const data = currentData();
+      const feet = data?.feetPx || [imgW / 2, imgH];
+
+      // Segments
+      const segs = getDisplaySegments();
+      for (const seg of segs) {
+        ctx.beginPath();
+        ctx.moveTo(seg[0], seg[1]);
+        ctx.lineTo(seg[2], seg[3]);
+        ctx.strokeStyle = '#e85d5d';
+        ctx.lineWidth = 2.5 / zoom;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+
+      // Preview line
+      if (chainActive && nodes.length && mouseWorld) {
+        const last = nodes[nodes.length - 1];
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(mouseWorld.x, mouseWorld.y);
+        ctx.strokeStyle = 'rgba(232, 93, 93, 0.45)';
+        ctx.lineWidth = 2 / zoom;
+        ctx.setLineDash([5 / zoom, 4 / zoom]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Nodes
+      for (const n of nodes) {
+        const isHov = hoveredNode?.id === n.id;
+        const r = (isHov ? NODE_RADIUS + 1.5 : NODE_RADIUS) / zoom;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = isHov ? '#ffe080' : '#f0a060';
+        ctx.fill();
+        ctx.strokeStyle = '#8a5030';
+        ctx.lineWidth = 1.5 / zoom;
+        ctx.stroke();
+      }
+
+      // Feet anchor
+      ctx.beginPath();
+      ctx.arc(feet[0], feet[1], 4 / zoom, 0, Math.PI * 2);
+      ctx.fillStyle = '#60e8a0';
+      ctx.fill();
+      ctx.strokeStyle = '#208050';
+      ctx.lineWidth = 1.5 / zoom;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(feet[0] - 6 / zoom, feet[1]);
+      ctx.lineTo(feet[0] + 6 / zoom, feet[1]);
+      ctx.moveTo(feet[0], feet[1] - 6 / zoom);
+      ctx.lineTo(feet[0], feet[1] + 2 / zoom);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      const sort = document.getElementById('filter-sort').value;
+      const cat = document.getElementById('filter-category').value;
+      const lowOnly = document.getElementById('filter-low-only').checked;
+
+      filtered = manifest.filter(a => {
+        if (cat && a.category !== cat) return false;
+        if (lowOnly && !collision[a.path]?.low) return false;
+        if (!q) return true;
+        return a.path.toLowerCase().includes(q) || (a.propId || '').includes(q) || a.name.toLowerCase().includes(q);
+      });
+
+      const score = a => {
+        const d = collision[a.path] || {};
+        const has = (d.segments || []).length > 0;
+        const ed = !!d.edited;
+        switch (sort) {
+          case 'unedited': return ed ? 1 : 0;
+          case 'edited': return ed ? 0 : 1;
+          case 'no-collision': return has ? 1 : 0;
+          case 'has-collision': return has ? 0 : 1;
+          default: return 0;
+        }
+      };
+
+      filtered.sort((a, b) => {
+        const sa = score(a), sb = score(b);
+        if (sa !== sb) return sa - sb;
+        return a.path.localeCompare(b.path);
+      });
+
+      document.getElementById('stat-filtered').textContent = `(${filtered.length})`;
+      renderAssetList();
+    }
+
+    function renderAssetList() {
+      const ul = document.getElementById('asset-list');
+      const frag = document.createDocumentFragment();
+      for (const a of filtered) {
+        const d = collision[a.path] || {};
+        const has = (d.segments || []).length > 0;
+        const li = document.createElement('li');
+        li.dataset.path = a.path;
+        if (a.path === currentPath) li.classList.add('active');
+        const low = d.low ? ' low' : '';
+        li.innerHTML = `<span>${a.category}/${a.name}</span><span class="badge ${has ? 'done' : ''}">${has ? '✓' : '·'}${low}</span>`;
+        li.addEventListener('click', () => selectAsset(a.path));
+        frag.appendChild(li);
+      }
+      ul.innerHTML = '';
+      ul.appendChild(frag);
+    }
+
+    function selectAsset(path, skipSave = false) {
+      if (!skipSave) saveCurrentToCollision();
+      currentPath = path;
+      const idx = filtered.findIndex(a => a.path === path);
+      currentIndex = idx >= 0 ? idx : filtered.findIndex(a => a.path === path);
+      const asset = manifest.find(a => a.path === path);
+      const data = collision[path];
+
+      document.getElementById('stat-name').textContent = asset?.name || '—';
+      document.getElementById('stat-prop').textContent = data?.propId || '—';
+      document.getElementById('chk-low').checked = !!data?.low;
+
+      crop = data?.crop ? [...data.crop] : [0, 0, asset?.width || 64, asset?.height || 64];
+      imgW = crop[2];
+      imgH = crop[3];
+
+      nodes = nodesFromSegments(data?.segments || []);
+      loopClosed = detectLoopClosed(data?.segments || [], nodes);
+      chainActive = false;
+      feetMode = false;
+      document.getElementById('status-extra').textContent = '';
+      document.getElementById('stat-segs').textContent = (data?.segments || []).length;
+
+      mapImage = new Image();
+      mapImage.onload = () => {
+        if (!data?.crop) {
+          imgW = mapImage.naturalWidth;
+          imgH = mapImage.naturalHeight;
+          crop = [0, 0, imgW, imgH];
+        }
+        fitToScreen();
+      };
+      mapImage.onerror = () => showToast('Could not load image — serve from project root');
+      mapImage.src = PROJECT_ROOT + path;
+
+      renderAssetList();
+      render();
+    }
+
+    function selectByOffset(delta) {
+      if (!filtered.length) return;
+      saveCurrentToCollision();
+      let idx = filtered.findIndex(a => a.path === currentPath);
+      if (idx < 0) idx = 0;
+      idx = (idx + delta + filtered.length) % filtered.length;
+      selectAsset(filtered[idx].path, true);
+    }
+
+    function handleCanvasClick(world) {
+      if (feetMode) {
+        const data = currentData();
+        data.feetPx = [Math.round(world.x * 10) / 10, Math.round(world.y * 10) / 10];
+        data.edited = true;
+        feetMode = false;
+        document.getElementById('status-extra').textContent = '';
+        scheduleSave();
+        showToast('Feet anchor set');
+        render();
+        return;
+      }
+
+      const existing = findNodeAt(world.x, world.y, 14);
+      if (chainActive && existing && nodes.length > 1 && existing.id === nodes[0].id) {
+        // Close loop
+        loopClosed = true;
+        chainActive = false;
+        const data = currentData();
+        data.segments = segmentsFromNodes(nodes, true);
+        data.edited = true;
+        document.getElementById('stat-segs').textContent = data.segments.length;
+        document.getElementById('status-extra').textContent = '';
+        scheduleSave();
+        showToast('Loop closed');
+        render();
+        return;
+      }
+
+      if (!chainActive) {
+        loopClosed = false;
+        nodes = existing ? [existing] : [{ id: nextNodeId++, x: Math.round(world.x), y: Math.round(world.y) }];
+        chainActive = true;
+        document.getElementById('status-extra').textContent = 'Chain started — click next point (Esc to finish)';
+      } else {
+        const node = existing || { id: nextNodeId++, x: Math.round(world.x), y: Math.round(world.y) };
+        if (!existing) nodes.push(node);
+        loopClosed = false;
+        const data = currentData();
+        data.segments = segmentsFromNodes(nodes);
+        data.edited = true;
+        document.getElementById('stat-segs').textContent = data.segments.length;
+        document.getElementById('status-extra').textContent = 'Chain: click next (Esc finish, Backspace undo)';
+        scheduleSave();
+      }
+      render();
+    }
+
+    function deleteNodeAt(world) {
+      const node = findNodeAt(world.x, world.y, 16);
+      if (!node) return false;
+      nodes = nodes.filter(n => n.id !== node.id);
+      loopClosed = false;
+      const data = currentData();
+      data.segments = segmentsFromNodes(nodes);
+      data.edited = true;
+      document.getElementById('stat-segs').textContent = data.segments.length;
+      if (!nodes.length) chainActive = false;
+      scheduleSave();
+      render();
+      showToast('Node removed');
+      return true;
+    }
+
+    function undoLastSegment() {
+      if (nodes.length > 1) {
+        nodes.pop();
+        loopClosed = false;
+        syncSegmentsToData();
+        const data = currentData();
+        data.edited = true;
+        render();
+        showToast('Undid last point');
+        return true;
+      }
+      if (chainActive) {
+        chainActive = false;
+        loopClosed = false;
+        nodes = [];
+        document.getElementById('status-extra').textContent = '';
+        render();
+        return true;
+      }
+      return false;
+    }
+
+    function exportJson() {
+      saveCurrentToCollision();
+      const blob = new Blob([JSON.stringify(collision, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'collision_data.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showToast('Exported collision_data.json');
+    }
+
+    function dasSnippetForCurrent() {
+      saveCurrentToCollision();
+      const data = currentData();
+      if (!data?.propId) {
+        showToast('No prop ID for this asset');
+        return;
+      }
+      const key = data.propId.toUpperCase().replace(/_/g, '_');
+      const prefix = 'PROP_' + data.propId.toUpperCase();
+      const lines = [];
+      lines.push(`    ${prefix}_CROP = float4(${crop.join(', ')})`);
+      lines.push(`    ${prefix}_FEET_PX = float2(${data.feetPx[0]}, ${data.feetPx[1]})`);
+      lines.push(`    ${prefix}_WORLD_WIDTH = GROUND_TILE_WORLD_WIDTH * ${data.worldWidth || 1.5}`);
+      if (data.low) {
+        lines.push(`    // ${prefix}: low obstacle — blocks movement, projectiles pass through`);
+      }
+      if (data.segments?.length) {
+        lines.push(`    ${prefix}_WALL_LINES_PX <- [`);
+        for (const s of data.segments) {
+          lines.push(`        float4(${s[0]}, ${s[1]}, ${s[2]}, ${s[3]}),`);
+        }
+        lines.push('    ]');
+      }
+      navigator.clipboard.writeText(lines.join('\n'));
+      showToast('Das snippet copied');
+    }
+
+    canvas.addEventListener('mousemove', e => {
+      mouseWorld = screenToWorld(e.clientX, e.clientY);
+      document.getElementById('cursor-coord').textContent =
+        `${Math.round(mouseWorld.x)}, ${Math.round(mouseWorld.y)}`;
+
+      if (isPanning) {
+        panX = e.clientX - panStart.x;
+        panY = e.clientY - panStart.y;
+        render();
+        return;
+      }
+      if (dragNode) {
+        dragNode.x = Math.round(mouseWorld.x - dragOffset.x);
+        dragNode.y = Math.round(mouseWorld.y - dragOffset.y);
+        syncSegmentsToData();
+        render();
+        return;
+      }
+      hoveredNode = findNodeAt(mouseWorld.x, mouseWorld.y, 14);
+      render();
+    });
+
+    canvas.addEventListener('mousedown', e => {
+      if (e.button === 2) {
+        e.preventDefault();
+        const world = screenToWorld(e.clientX, e.clientY);
+        if (deleteNodeAt(world)) return;
+        chainActive = false;
+        document.getElementById('status-extra').textContent = '';
+        render();
+        return;
+      }
+      if (e.button !== 0) return;
+      if (e.shiftKey) {
+        isPanning = true;
+        panStart = { x: e.clientX - panX, y: e.clientY - panY };
+        wrap.classList.add('panning');
+        return;
+      }
+      const world = screenToWorld(e.clientX, e.clientY);
+      const hit = findNodeAt(world.x, world.y, 14);
+      if (hit && e.altKey) {
+        dragNode = hit;
+        dragOffset = { x: world.x - hit.x, y: world.y - hit.y };
+        return;
+      }
+      handleCanvasClick(world);
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      isPanning = false;
+      wrap.classList.remove('panning');
+      if (dragNode) {
+        syncSegmentsToData();
+        const data = currentData();
+        data.edited = true;
+        dragNode = null;
+      }
+    });
+
+    canvas.addEventListener('wheel', e => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+      const nz = Math.max(0.25, Math.min(32, zoom * factor));
+      panX = mx - (mx - panX) * (nz / zoom);
+      panY = my - (my - panY) * (nz / zoom);
+      zoom = nz;
+      document.getElementById('stat-zoom').textContent = Math.round(zoom * 100) + '%';
+      render();
+    }, { passive: false });
+
+    canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        chainActive = false;
+        feetMode = false;
+        document.getElementById('status-extra').textContent = '';
+        render();
+      }
+      if (e.key === 'Backspace') {
+        e.preventDefault();
+        undoLastSegment();
+      }
+      if (e.key === 'f' || e.key === 'F') {
+        feetMode = !feetMode;
+        document.getElementById('status-extra').textContent = feetMode ? 'Click feet anchor position' : '';
+      }
+      if (e.key === 'ArrowLeft') selectByOffset(-1);
+      if (e.key === 'ArrowRight') selectByOffset(1);
+    });
+
+    document.getElementById('search').addEventListener('input', applyFilters);
+    document.getElementById('filter-sort').addEventListener('change', applyFilters);
+    document.getElementById('filter-category').addEventListener('change', applyFilters);
+    document.getElementById('filter-low-only').addEventListener('change', applyFilters);
+    document.getElementById('btn-prev').addEventListener('click', () => selectByOffset(-1));
+    document.getElementById('btn-next').addEventListener('click', () => selectByOffset(1));
+    document.getElementById('btn-save-now').addEventListener('click', saveNow);
+    document.getElementById('btn-apply-preset').addEventListener('click', () => {
+      const id = document.getElementById('preset-select').value;
+      if (!id) { showToast('Choose a preset first'); return; }
+      applyPresetById(id);
+    });
+    document.getElementById('btn-save-preset').addEventListener('click', saveCurrentAsPreset);
+    document.getElementById('btn-delete-preset').addEventListener('click', deleteSelectedPreset);
+    document.getElementById('btn-export').addEventListener('click', exportJson);
+    document.getElementById('btn-export-das').addEventListener('click', dasSnippetForCurrent);
+    document.getElementById('btn-import').addEventListener('click', () => document.getElementById('file-input').click());
+    document.getElementById('file-input').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          collision = JSON.parse(ev.target.result);
+          migrateCollisionFields();
+          applyFilters();
+          if (currentPath) selectAsset(currentPath, true);
+          scheduleSave();
+          showToast('Imported collision data');
+        } catch { showToast('Invalid JSON'); }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+    document.getElementById('btn-clear-lines').addEventListener('click', () => {
+      nodes = [];
+      chainActive = false;
+      loopClosed = false;
+      const data = currentData();
+      if (data) { data.segments = []; data.edited = true; }
+      document.getElementById('stat-segs').textContent = '0';
+      scheduleSave();
+      render();
+    });
+    document.getElementById('btn-close-loop').addEventListener('click', () => {
+      if (nodes.length < 3) { showToast('Need at least 3 points'); return; }
+      loopClosed = true;
+      chainActive = false;
+      const data = currentData();
+      data.segments = segmentsFromNodes(nodes, true);
+      data.edited = true;
+      document.getElementById('stat-segs').textContent = data.segments.length;
+      document.getElementById('status-extra').textContent = '';
+      scheduleSave();
+      showToast('Loop closed');
+      render();
+    });
+    document.getElementById('btn-set-feet').addEventListener('click', () => {
+      feetMode = true;
+      document.getElementById('status-extra').textContent = 'Click feet anchor position';
+    });
+    document.getElementById('btn-mark-unedited').addEventListener('click', () => {
+      const data = currentData();
+      if (data) data.edited = false;
+      applyFilters();
+      scheduleSave();
+      showToast('Marked unedited');
+    });
+    document.getElementById('chk-low').addEventListener('change', () => {
+      const data = currentData();
+      if (data) { data.low = document.getElementById('chk-low').checked; data.edited = true; scheduleSave(); }
+    });
+
+    function migrateCollisionFields() {
+      for (const path of Object.keys(collision)) {
+        const d = collision[path];
+        if (d.low === undefined) {
+          // Old "shootable" meant blocks projectiles; invert for "low" (shoot-through).
+          d.low = d.shootable === false;
+          delete d.shootable;
+        }
+      }
+    }
+
+    async function init() {
+      manifest = await fetch('asset_manifest.json').then(r => r.json());
+
+      try {
+        const r = await fetch(`${API}/collision_data`);
+        if (!r.ok) throw new Error('no api');
+        collision = await r.json();
+        apiAvailable = true;
+        setSaveStatus('Loaded collision_data.json', 'saved');
+      } catch {
+        collision = await fetch('collision_data.json').then(r => r.json());
+        setSaveStatus('Read-only — run serve.py to auto-save', 'error');
+      }
+      migrateCollisionFields();
+
+      try {
+        const r = await fetch(`${API}/presets`);
+        if (r.ok) {
+          const data = await r.json();
+          presets = data.presets || [];
+        } else {
+          throw new Error('no api');
+        }
+      } catch {
+        try {
+          const data = await fetch('collision_presets.json').then(r => r.json());
+          presets = data.presets || [];
+        } catch {
+          presets = [];
+        }
+      }
+      renderPresetSelect();
+
+      const cats = [...new Set(manifest.map(a => a.category))].sort();
+      const sel = document.getElementById('filter-category');
+      for (const cat of cats) {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        sel.appendChild(opt);
+      }
+
+      applyFilters();
+      if (filtered.length) selectAsset(filtered[0].path, true);
+      resizeCanvas();
+    }
+
+    window.addEventListener('beforeunload', e => {
+      if (apiAvailable) return;
+      e.preventDefault();
+      e.returnValue = '';
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+    window.saveCollisionNow = saveNow;
+    init().catch(() => showToast('Run serve.py from tools/collision-editor'));
+  </script>
+</body>
+</html>
