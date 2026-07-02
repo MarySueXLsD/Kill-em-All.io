@@ -15,11 +15,6 @@ def draw_legs_box(feet : float2; worldHeight : float; color : float4) {
 }
 
 
-def draw_feet_hit_circle(feet : float2; color : float4) {
-    draw_sphere(float3(feet.x, feet.y, DEBUG_DRAW_Z), ENTITY_FEET_RADIUS, color, 1, 20)
-}
-
-
 def draw_attack_hitboxes(playerFeet : float2; row, col : int) {
     draw_sphere(
         float3(playerFeet.x, playerFeet.y, DEBUG_DRAW_Z),
@@ -41,7 +36,7 @@ def draw_aoe_hitboxes() {
     if (!effectsRootNode.isAlive) {
         return
     }
-    let hitReach = AOE_HIT_RADIUS + ENTITY_FEET_RADIUS
+    let hitReach = AOE_HIT_RADIUS + entity_legs_collision_half_width(PLAYER_WORLD_HEIGHT)
     var inscope children = effectsRootNode.get_children()
     for (child in children) {
         if (!child.isAlive) {
@@ -82,6 +77,30 @@ def draw_prop_obstacle_borders() {
             float4(0.2, 0.65, 1.0, 1.0),
             1
         )
+    }
+}
+
+
+def draw_prop_collision_sort_bounds() {
+    for (i in range(length(propSpriteNodes))) {
+        let node = propSpriteNodes[i]
+        if (!node.isAlive || !node.isActive) {
+            continue
+        }
+        let spriteBounds = sprite_node_collision_y_bounds(node)
+        draw_box(
+            float3(spriteBounds.xMin, spriteBounds.yMin, DEBUG_DRAW_Z),
+            float3(spriteBounds.xMax, spriteBounds.yMax, DEBUG_DRAW_Z + 0.01),
+            float4(0.25, 0.85, 1.0, 1.0)
+        )
+        let collisionBounds = prop_collision_bounds_at(i, node)
+        if (collisionBounds.yMax > collisionBounds.yMin && collisionBounds.xMax > collisionBounds.xMin) {
+            draw_box(
+                float3(collisionBounds.xMin, collisionBounds.yMin, DEBUG_DRAW_Z + 0.02),
+                float3(collisionBounds.xMax, collisionBounds.yMax, DEBUG_DRAW_Z + 0.03),
+                float4(0.95, 0.55, 0.15, 1.0)
+            )
+        }
     }
 }
 
@@ -142,7 +161,7 @@ def draw_player_special_pending(ctrl : PlayerController?) {
     if (!ctrl.actionActive || !ctrl.actionIsSpecial) {
         return
     }
-    let hitReach = AOE_HIT_RADIUS + ENTITY_FEET_RADIUS
+    let hitReach = AOE_HIT_RADIUS + entity_legs_collision_half_width(PLAYER_WORLD_HEIGHT)
     draw_sphere(
         float3(ctrl.specialTargetWorld.x, ctrl.specialTargetWorld.y, DEBUG_DRAW_Z),
         hitReach,
@@ -161,7 +180,6 @@ def public draw_character_debug_hitboxes() {
         get_component(playerNode) $(var ctrl : PlayerController?) {
             if (ctrl != null) {
                 draw_legs_box(ctrl.position, PLAYER_WORLD_HEIGHT, float4(0.2, 1.0, 0.35, 1.0))
-                draw_feet_hit_circle(ctrl.position, float4(0.2, 1.0, 0.35, 0.75))
                 if (ctrl.actionActive && ctrl.actionTexture == attack1Texture) {
                     draw_attack_hitboxes(ctrl.position, ctrl.actionRow, int(ctrl.actionAnimTimer))
                 }
@@ -172,6 +190,7 @@ def public draw_character_debug_hitboxes() {
 
     draw_aoe_hitboxes()
     draw_prop_obstacle_borders()
+    draw_prop_collision_sort_bounds()
     draw_border_wall_bottom_lines()
     draw_projectile_hitboxes()
 
@@ -186,13 +205,10 @@ def public draw_character_debug_hitboxes() {
         get_component(child) $(var ctrl : EnemyController?) {
             if (ctrl != null && !ctrl.dead) {
                 var boxColor = float4(1.0, 0.9, 0.2, 1.0)
-                var circleColor = float4(1.0, 0.9, 0.2, 0.75)
                 if (ctrl.hitFlashTimer > 0.0) {
                     boxColor = float4(1.0, 0.15, 0.15, 1.0)
-                    circleColor = float4(1.0, 0.15, 0.15, 0.85)
                 }
                 draw_legs_box(ctrl.position, ENEMY_WORLD_HEIGHT, boxColor)
-                draw_feet_hit_circle(ctrl.position, circleColor)
                 if (ctrl.attacking) {
                     draw_attack_hitboxes(ctrl.position, ctrl.attackRow, int(ctrl.attackAnimTimer))
                 }

@@ -140,11 +140,12 @@ def on_update() {
     if (is_disclaimer_active()) {
         if (update_disclaimer()) {
             init_loading_screen()
-            advance_loading()
+            return
         }
         return
     }
     if (!gameReady) {
+        update_loading_screen()
         advance_loading()
         return
     }
@@ -160,7 +161,6 @@ def on_update() {
 
     enemyFrameStamp += 1
     ensure_enemy_frame_cache(enemyFrameStamp)
-    player::sync_player_world_position()
 
     flush_exp_popup_spawns()
     update_tile_angle_tuning()
@@ -170,7 +170,6 @@ def on_update() {
     update_map_visibility()
     if (!playerDashing) {
         update_prop_visibility()
-        update_collision_depth_sorting()
     }
     update_dash_ghosts()
     update_enemy_spawning()
@@ -184,8 +183,22 @@ def on_update() {
     draw_character_debug_hitboxes()
 }
 
+
+[export]
+def on_post_update() {
+    if (!gameReady || is_disclaimer_active() || is_upgrade_picker_active()) {
+        return
+    }
+    if (!playerDashing) {
+        player::sync_player_world_position()
+        update_collision_depth_sorting()
+    }
+}
+
+
 [export]
 def on_resolution_changed(res : int2) {
+    resize_loading_screen()
     resize_enemy_health_canvas()
     layout_player_bottom_huds()
     resize_upgrade_picker()

@@ -670,8 +670,15 @@
       114
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        113,
+        54,
+        87
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_1_Variation_1_North.png": {
@@ -688,8 +695,15 @@
       122
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        91,
+        62,
+        122
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_1_Variation_1_South.png": {
@@ -706,8 +720,15 @@
       115
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        88,
+        55,
+        115
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_1_Variation_1_West.png": {
@@ -724,8 +745,15 @@
       122
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        121,
+        61,
+        91
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_1_Variation_2_East.png": {
@@ -742,8 +770,15 @@
       89
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        72,
+        36,
+        89
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_1_Variation_2_North.png": {
@@ -778,8 +813,15 @@
       90
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        89,
+        41,
+        74
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_1_Variation_2_West.png": {
@@ -814,8 +856,15 @@
       120
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        92,
+        54,
+        120
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_1_North.png": {
@@ -832,8 +881,15 @@
       119
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        119,
+        56,
+        92
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_1_South.png": {
@@ -850,8 +906,15 @@
       120
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        119,
+        57,
+        94
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_1_West.png": {
@@ -868,8 +931,15 @@
       119
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        93,
+        54,
+        119
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_2_East.png": {
@@ -886,9 +956,16 @@
       42
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        0,
+        12,
+        53,
+        42
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_2_North.png": {
     "propId": null,
@@ -904,9 +981,16 @@
       42
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        1,
+        42,
+        53,
+        13
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_2_South.png": {
     "propId": null,
@@ -922,9 +1006,16 @@
       43
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        0,
+        42,
+        53,
+        13
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_2_West.png": {
     "propId": null,
@@ -940,9 +1031,16 @@
       41
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        -1,
+        11,
+        55,
+        41
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_3_East.png": {
     "propId": null,
@@ -958,8 +1056,15 @@
       129
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        100,
+        54,
+        129
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_3_North.png": {
@@ -976,8 +1081,15 @@
       129
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        128,
+        56,
+        102
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_3_South.png": {
@@ -994,8 +1106,15 @@
       130
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        130,
+        56,
+        104
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_3_West.png": {
@@ -1012,8 +1131,15 @@
       129
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        103,
+        55,
+        129
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_4_East.png": {
@@ -1030,9 +1156,16 @@
       51
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        1,
+        21,
+        54,
+        50
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_4_North.png": {
     "propId": null,
@@ -1048,9 +1181,16 @@
       51
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        4,
+        50,
+        56,
+        22
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_4_South.png": {
     "propId": null,
@@ -1066,9 +1206,16 @@
       52
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        3,
+        52,
+        58,
+        23
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_4_West.png": {
     "propId": null,
@@ -1084,9 +1231,16 @@
       51
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        2,
+        22,
+        57,
+        51
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_5_East.png": {
     "propId": null,
@@ -1102,8 +1256,15 @@
       160
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        157,
+        68,
+        125
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_5_North.png": {
@@ -1120,8 +1281,15 @@
       160
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        123,
+        68,
+        156
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_5_South.png": {
@@ -1138,8 +1306,15 @@
       160
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        124,
+        69,
+        157
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_5_West.png": {
@@ -1156,8 +1331,15 @@
       160
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        157,
+        69,
+        124
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Door/Type_3_Variation_6_East.png": {
@@ -1174,9 +1356,16 @@
       65
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        3,
+        63,
+        69,
+        29
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_6_North.png": {
     "propId": null,
@@ -1192,9 +1381,16 @@
       65
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        2,
+        30,
+        68,
+        63
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_6_South.png": {
     "propId": null,
@@ -1210,9 +1406,16 @@
       65
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        4,
+        30,
+        68,
+        62
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Door/Type_3_Variation_6_West.png": {
     "propId": null,
@@ -1228,9 +1431,16 @@
       65
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        3,
+        62,
+        68,
+        30
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/FirePlace/Type_1_Variation_1.png": {
     "propId": null,
@@ -1246,9 +1456,40 @@
       44
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        1,
+        32,
+        35,
+        43
+      ],
+      [
+        35,
+        43,
+        67,
+        30
+      ],
+      [
+        67,
+        30,
+        36,
+        5
+      ],
+      [
+        36,
+        5,
+        5,
+        11
+      ],
+      [
+        5,
+        11,
+        1,
+        32
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Flora/Type_1_Variation_1_East.png": {
     "propId": null,
@@ -32316,8 +32557,27 @@
       51
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        5,
+        10,
+        32,
+        17
+      ],
+      [
+        32,
+        17,
+        40,
+        15
+      ],
+      [
+        40,
+        15,
+        86,
+        50
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Tree/Type_5_Variation_2_North.png": {
@@ -32334,8 +32594,21 @@
       53
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        15,
+        46,
+        26,
+        28
+      ],
+      [
+        26,
+        28,
+        81,
+        9
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Tree/Type_5_Variation_2_South.png": {
@@ -32352,8 +32625,21 @@
       54
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        48,
+        70,
+        17
+      ],
+      [
+        70,
+        17,
+        76,
+        6
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Tree/Type_5_Variation_2_West.png": {
@@ -32370,8 +32656,27 @@
       53
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        5,
+        9,
+        41,
+        24
+      ],
+      [
+        41,
+        24,
+        57,
+        38
+      ],
+      [
+        57,
+        38,
+        81,
+        39
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Tree/Type_5_Variation_3_East.png": {
@@ -32958,8 +33263,39 @@
       110
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        115,
+        62,
+        130,
+        66
+      ],
+      [
+        130,
+        66,
+        137,
+        59
+      ],
+      [
+        137,
+        59,
+        128,
+        50
+      ],
+      [
+        128,
+        50,
+        115,
+        54
+      ],
+      [
+        115,
+        54,
+        115,
+        62
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_10_East.png": {
@@ -32976,9 +33312,34 @@
       79
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        83,
+        46,
+        17,
+        79
+      ],
+      [
+        17,
+        79,
+        6,
+        72
+      ],
+      [
+        6,
+        72,
+        69,
+        41
+      ],
+      [
+        69,
+        41,
+        83,
+        46
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_10_North.png": {
     "propId": "wall_a10_n",
@@ -32994,9 +33355,34 @@
       78
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        2,
+        46,
+        71,
+        78
+      ],
+      [
+        71,
+        78,
+        82,
+        70
+      ],
+      [
+        82,
+        70,
+        18,
+        41
+      ],
+      [
+        18,
+        41,
+        2,
+        46
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_10_South.png": {
     "propId": "wall_a10_s",
@@ -33012,9 +33398,34 @@
       80
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        4,
+        46,
+        69,
+        79
+      ],
+      [
+        69,
+        79,
+        83,
+        71
+      ],
+      [
+        83,
+        71,
+        22,
+        41
+      ],
+      [
+        22,
+        41,
+        4,
+        46
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_10_West.png": {
     "propId": "wall_a10_w",
@@ -33030,9 +33441,34 @@
       80
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        3,
+        70,
+        18,
+        79
+      ],
+      [
+        18,
+        79,
+        80,
+        45
+      ],
+      [
+        80,
+        45,
+        62,
+        39
+      ],
+      [
+        62,
+        39,
+        3,
+        70
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_11_East.png": {
     "propId": "wall_a11_e",
@@ -33048,9 +33484,46 @@
       104
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        3,
+        96,
+        15,
+        103
+      ],
+      [
+        15,
+        103,
+        83,
+        69
+      ],
+      [
+        83,
+        69,
+        23,
+        38
+      ],
+      [
+        23,
+        38,
+        6,
+        46
+      ],
+      [
+        6,
+        46,
+        43,
+        61
+      ],
+      [
+        43,
+        61,
+        3,
+        96
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_11_North.png": {
     "propId": "wall_a11_n",
@@ -33066,9 +33539,46 @@
       79
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        4,
+        72,
+        19,
+        77
+      ],
+      [
+        19,
+        77,
+        65,
+        54
+      ],
+      [
+        65,
+        54,
+        114,
+        77
+      ],
+      [
+        114,
+        77,
+        130,
+        67
+      ],
+      [
+        130,
+        67,
+        66,
+        32
+      ],
+      [
+        66,
+        32,
+        4,
+        72
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_11_South.png": {
     "propId": "wall_a11_s",
@@ -33084,9 +33594,46 @@
       79
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        3,
+        45,
+        66,
+        78
+      ],
+      [
+        66,
+        78,
+        128,
+        45
+      ],
+      [
+        128,
+        45,
+        110,
+        37
+      ],
+      [
+        110,
+        37,
+        68,
+        57
+      ],
+      [
+        68,
+        57,
+        17,
+        36
+      ],
+      [
+        17,
+        36,
+        3,
+        45
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_11_West.png": {
     "propId": "wall_a11_w",
@@ -33102,9 +33649,46 @@
       103
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        68,
+        101,
+        81,
+        93
+      ],
+      [
+        81,
+        93,
+        33,
+        64
+      ],
+      [
+        33,
+        64,
+        81,
+        43
+      ],
+      [
+        81,
+        43,
+        62,
+        34
+      ],
+      [
+        62,
+        34,
+        3,
+        67
+      ],
+      [
+        3,
+        67,
+        68,
+        101
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_12_East.png": {
     "propId": "wall_a12_e",
@@ -33336,8 +33920,33 @@
       206
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        196.1,
+        16.6,
+        207.2
+      ],
+      [
+        16.6,
+        207.2,
+        84,
+        169
+      ],
+      [
+        84,
+        169,
+        64.3,
+        159.1
+      ],
+      [
+        64.3,
+        159.1,
+        0,
+        196.1
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_15_North.png": {
@@ -33354,8 +33963,33 @@
       206
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3.1,
+        166.8,
+        68.4,
+        204.8
+      ],
+      [
+        68.4,
+        204.8,
+        84,
+        196.2
+      ],
+      [
+        84,
+        196.2,
+        17.6,
+        158.2
+      ],
+      [
+        17.6,
+        158.2,
+        3.1,
+        166.8
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_15_South.png": {
@@ -33372,8 +34006,33 @@
       206
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3.1,
+        166.8,
+        68.4,
+        204.8
+      ],
+      [
+        68.4,
+        204.8,
+        84,
+        196.2
+      ],
+      [
+        84,
+        196.2,
+        17.6,
+        158.2
+      ],
+      [
+        17.6,
+        158.2,
+        3.1,
+        166.8
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_15_West.png": {
@@ -33390,8 +34049,33 @@
       204
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        194.2,
+        16.6,
+        205.2
+      ],
+      [
+        16.6,
+        205.2,
+        84,
+        167.4
+      ],
+      [
+        84,
+        167.4,
+        64.3,
+        157.6
+      ],
+      [
+        64.3,
+        157.6,
+        0,
+        194.2
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_16_East.png": {
@@ -33408,8 +34092,45 @@
       229
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        218,
+        18,
+        228
+      ],
+      [
+        18,
+        228,
+        82,
+        197
+      ],
+      [
+        82,
+        197,
+        18,
+        165
+      ],
+      [
+        18,
+        165,
+        3,
+        178
+      ],
+      [
+        3,
+        178,
+        46,
+        199
+      ],
+      [
+        46,
+        199,
+        3,
+        218
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_16_North.png": {
@@ -33426,8 +34147,45 @@
       205
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        194,
+        17,
+        204
+      ],
+      [
+        17,
+        204,
+        63,
+        177
+      ],
+      [
+        63,
+        177,
+        114,
+        202
+      ],
+      [
+        114,
+        202,
+        129,
+        192
+      ],
+      [
+        129,
+        192,
+        64,
+        156
+      ],
+      [
+        64,
+        156,
+        2,
+        194
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_16_South.png": {
@@ -33444,8 +34202,45 @@
       207
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        175,
+        64,
+        205
+      ],
+      [
+        64,
+        205,
+        129,
+        175
+      ],
+      [
+        129,
+        175,
+        108,
+        164
+      ],
+      [
+        108,
+        164,
+        66,
+        185
+      ],
+      [
+        66,
+        185,
+        21,
+        164
+      ],
+      [
+        21,
+        164,
+        1,
+        175
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_16_West.png": {
@@ -33462,8 +34257,45 @@
       230
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        68,
+        228,
+        80,
+        218
+      ],
+      [
+        80,
+        218,
+        33,
+        190
+      ],
+      [
+        33,
+        190,
+        76,
+        168
+      ],
+      [
+        76,
+        168,
+        54,
+        158
+      ],
+      [
+        54,
+        158,
+        2,
+        193
+      ],
+      [
+        2,
+        193,
+        68,
+        228
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_17_East.png": {
@@ -33624,8 +34456,33 @@
       143
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        131,
+        21,
+        140
+      ],
+      [
+        21,
+        140,
+        38,
+        129
+      ],
+      [
+        38,
+        129,
+        21,
+        121
+      ],
+      [
+        21,
+        121,
+        1,
+        131
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_19_North.png": {
@@ -33642,8 +34499,33 @@
       144
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        132,
+        20,
+        141
+      ],
+      [
+        20,
+        141,
+        35,
+        131
+      ],
+      [
+        35,
+        131,
+        18,
+        123
+      ],
+      [
+        18,
+        123,
+        1,
+        132
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_19_South.png": {
@@ -33660,8 +34542,33 @@
       143
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        8,
+        131,
+        24,
+        141
+      ],
+      [
+        24,
+        141,
+        37,
+        132
+      ],
+      [
+        37,
+        132,
+        19,
+        123
+      ],
+      [
+        19,
+        123,
+        8,
+        131
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_19_West.png": {
@@ -33678,8 +34585,33 @@
       143
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        5,
+        126,
+        22,
+        136
+      ],
+      [
+        22,
+        136,
+        35,
+        127
+      ],
+      [
+        35,
+        127,
+        21,
+        118
+      ],
+      [
+        21,
+        118,
+        5,
+        126
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_1_East.png": {
@@ -33714,8 +34646,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        136,
+        66,
+        167
+      ],
+      [
+        66,
+        167,
+        81,
+        160
+      ],
+      [
+        81,
+        160,
+        17,
+        129
+      ],
+      [
+        17,
+        129,
+        3,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_1_South.png": {
@@ -33732,8 +34689,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        136,
+        66,
+        167
+      ],
+      [
+        66,
+        167,
+        81,
+        160
+      ],
+      [
+        81,
+        160,
+        17,
+        129
+      ],
+      [
+        17,
+        129,
+        3,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_1_West.png": {
@@ -33750,8 +34732,33 @@
       167
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        159,
+        16,
+        168
+      ],
+      [
+        16,
+        168,
+        81,
+        137
+      ],
+      [
+        81,
+        137,
+        62,
+        129
+      ],
+      [
+        62,
+        129,
+        0,
+        159
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_20_East.png": {
@@ -33768,8 +34775,45 @@
       156
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        135,
+        44,
+        152
+      ],
+      [
+        44,
+        152,
+        78,
+        153
+      ],
+      [
+        78,
+        153,
+        129,
+        135
+      ],
+      [
+        129,
+        135,
+        116,
+        125
+      ],
+      [
+        116,
+        125,
+        2,
+        126
+      ],
+      [
+        2,
+        126,
+        1,
+        135
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_20_North.png": {
@@ -33786,8 +34830,45 @@
       191
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        22,
+        188,
+        57,
+        161
+      ],
+      [
+        57,
+        161,
+        16,
+        131
+      ],
+      [
+        16,
+        131,
+        6,
+        148
+      ],
+      [
+        6,
+        148,
+        29,
+        161
+      ],
+      [
+        29,
+        161,
+        4,
+        182
+      ],
+      [
+        4,
+        182,
+        22,
+        188
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_20_South.png": {
@@ -33804,8 +34885,45 @@
       193
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        43,
+        190,
+        57,
+        180
+      ],
+      [
+        57,
+        180,
+        30,
+        153
+      ],
+      [
+        30,
+        153,
+        44,
+        132
+      ],
+      [
+        44,
+        132,
+        22,
+        128
+      ],
+      [
+        22,
+        128,
+        3,
+        157
+      ],
+      [
+        3,
+        157,
+        43,
+        190
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_20_West.png": {
@@ -33822,8 +34940,45 @@
       153
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        143,
+        16,
+        149
+      ],
+      [
+        16,
+        149,
+        63,
+        133
+      ],
+      [
+        63,
+        133,
+        117,
+        148
+      ],
+      [
+        117,
+        148,
+        130,
+        141
+      ],
+      [
+        130,
+        141,
+        63,
+        115
+      ],
+      [
+        63,
+        115,
+        0,
+        143
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_21_East.png": {
@@ -33984,8 +35139,45 @@
       169
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        136,
+        63,
+        167
+      ],
+      [
+        63,
+        167,
+        128,
+        135
+      ],
+      [
+        128,
+        135,
+        113,
+        125
+      ],
+      [
+        113,
+        125,
+        64,
+        150
+      ],
+      [
+        64,
+        150,
+        16,
+        125
+      ],
+      [
+        16,
+        125,
+        3,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_2_North.png": {
@@ -34002,8 +35194,45 @@
       191
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        184,
+        15,
+        191
+      ],
+      [
+        15,
+        191,
+        81,
+        158
+      ],
+      [
+        81,
+        158,
+        23,
+        125
+      ],
+      [
+        23,
+        125,
+        8,
+        138
+      ],
+      [
+        8,
+        138,
+        52,
+        158
+      ],
+      [
+        52,
+        158,
+        0,
+        184
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_2_South.png": {
@@ -34020,8 +35249,45 @@
       193
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        68,
+        191,
+        82,
+        182
+      ],
+      [
+        82,
+        182,
+        34,
+        152
+      ],
+      [
+        34,
+        152,
+        78,
+        125
+      ],
+      [
+        78,
+        125,
+        60,
+        115
+      ],
+      [
+        60,
+        115,
+        1,
+        155
+      ],
+      [
+        1,
+        155,
+        68,
+        191
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_2_West.png": {
@@ -34038,8 +35304,45 @@
       169
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        158,
+        14,
+        165
+      ],
+      [
+        14,
+        165,
+        64,
+        143
+      ],
+      [
+        64,
+        143,
+        114,
+        165
+      ],
+      [
+        114,
+        165,
+        129,
+        157
+      ],
+      [
+        129,
+        157,
+        66,
+        126
+      ],
+      [
+        66,
+        126,
+        2,
+        158
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_3_East.png": {
@@ -34056,9 +35359,34 @@
       61
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        4,
+        54,
+        13,
+        60
+      ],
+      [
+        13,
+        60,
+        75,
+        28
+      ],
+      [
+        75,
+        28,
+        62,
+        20
+      ],
+      [
+        62,
+        20,
+        4,
+        54
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_3_North.png": {
     "propId": "wall_a3_n",
@@ -34074,9 +35402,34 @@
       60
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        1,
+        29,
+        68,
+        59
+      ],
+      [
+        68,
+        59,
+        82,
+        47
+      ],
+      [
+        82,
+        47,
+        16,
+        16
+      ],
+      [
+        16,
+        16,
+        1,
+        29
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_3_South.png": {
     "propId": "wall_a3_s",
@@ -34092,9 +35445,34 @@
       60
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        2,
+        27,
+        66,
+        60
+      ],
+      [
+        66,
+        60,
+        82,
+        48
+      ],
+      [
+        82,
+        48,
+        17,
+        17
+      ],
+      [
+        17,
+        17,
+        2,
+        27
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_3_West.png": {
     "propId": "wall_a3_w",
@@ -34110,9 +35488,34 @@
       63
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        1,
+        55,
+        12,
+        61
+      ],
+      [
+        12,
+        61,
+        78,
+        28
+      ],
+      [
+        78,
+        28,
+        65,
+        20
+      ],
+      [
+        65,
+        20,
+        1,
+        55
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_1_Variation_4_East.png": {
     "propId": "wall_a4_e",
@@ -34128,8 +35531,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -2,
+        161,
+        17,
+        169
+      ],
+      [
+        17,
+        169,
+        82,
+        137
+      ],
+      [
+        82,
+        137,
+        63,
+        128
+      ],
+      [
+        63,
+        128,
+        -2,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_4_North.png": {
@@ -34146,8 +35574,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        134,
+        67,
+        167
+      ],
+      [
+        67,
+        167,
+        80,
+        156
+      ],
+      [
+        80,
+        156,
+        21,
+        126
+      ],
+      [
+        21,
+        126,
+        2,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_4_South.png": {
@@ -34164,8 +35617,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        134,
+        66,
+        165
+      ],
+      [
+        66,
+        165,
+        78,
+        155
+      ],
+      [
+        78,
+        155,
+        18,
+        127
+      ],
+      [
+        18,
+        127,
+        -1,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_4_West.png": {
@@ -34182,8 +35660,33 @@
       167
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        158,
+        16,
+        165
+      ],
+      [
+        16,
+        165,
+        82,
+        133
+      ],
+      [
+        82,
+        133,
+        66,
+        125
+      ],
+      [
+        66,
+        125,
+        1,
+        158
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_5_East.png": {
@@ -34200,8 +35703,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        158,
+        17,
+        165
+      ],
+      [
+        17,
+        165,
+        79,
+        133
+      ],
+      [
+        79,
+        133,
+        64,
+        126
+      ],
+      [
+        64,
+        126,
+        1,
+        158
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_5_North.png": {
@@ -34218,8 +35746,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        133,
+        67,
+        163
+      ],
+      [
+        67,
+        163,
+        81,
+        152
+      ],
+      [
+        81,
+        152,
+        20,
+        123
+      ],
+      [
+        20,
+        123,
+        4,
+        133
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_5_South.png": {
@@ -34236,8 +35789,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        134,
+        69,
+        164
+      ],
+      [
+        69,
+        164,
+        80,
+        155
+      ],
+      [
+        80,
+        155,
+        17,
+        124
+      ],
+      [
+        17,
+        124,
+        3,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_5_West.png": {
@@ -34254,8 +35832,33 @@
       167
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        157,
+        15,
+        164
+      ],
+      [
+        15,
+        164,
+        82,
+        132
+      ],
+      [
+        82,
+        132,
+        66,
+        123
+      ],
+      [
+        66,
+        123,
+        4,
+        157
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_6_East.png": {
@@ -34272,8 +35875,33 @@
       149
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        136,
+        25,
+        148
+      ],
+      [
+        25,
+        148,
+        51,
+        135
+      ],
+      [
+        51,
+        135,
+        25,
+        119
+      ],
+      [
+        25,
+        119,
+        1,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_6_North.png": {
@@ -34290,8 +35918,33 @@
       150
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        137,
+        26,
+        149
+      ],
+      [
+        26,
+        149,
+        51,
+        134
+      ],
+      [
+        51,
+        134,
+        26,
+        121
+      ],
+      [
+        26,
+        121,
+        0,
+        137
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_6_South.png": {
@@ -34308,8 +35961,33 @@
       150
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        136,
+        25,
+        149
+      ],
+      [
+        25,
+        149,
+        51,
+        134
+      ],
+      [
+        51,
+        134,
+        25,
+        120
+      ],
+      [
+        25,
+        120,
+        1,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_6_West.png": {
@@ -34326,8 +36004,33 @@
       151
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -2,
+        136,
+        24,
+        150
+      ],
+      [
+        24,
+        150,
+        51,
+        136
+      ],
+      [
+        51,
+        136,
+        25,
+        119
+      ],
+      [
+        25,
+        119,
+        -2,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_7_East.png": {
@@ -34344,8 +36047,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        159,
+        15,
+        167
+      ],
+      [
+        15,
+        167,
+        80,
+        136
+      ],
+      [
+        80,
+        136,
+        56,
+        125
+      ],
+      [
+        56,
+        125,
+        2,
+        159
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_7_North.png": {
@@ -34362,8 +36090,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        134,
+        64,
+        167
+      ],
+      [
+        64,
+        167,
+        81,
+        155
+      ],
+      [
+        81,
+        155,
+        21,
+        124
+      ],
+      [
+        21,
+        124,
+        3,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_7_South.png": {
@@ -34380,8 +36133,33 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        134,
+        64,
+        167
+      ],
+      [
+        64,
+        167,
+        81,
+        155
+      ],
+      [
+        81,
+        155,
+        16,
+        125
+      ],
+      [
+        16,
+        125,
+        0,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_7_West.png": {
@@ -34398,8 +36176,33 @@
       167
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        3,
+        158,
+        21,
+        165
+      ],
+      [
+        21,
+        165,
+        81,
+        134
+      ],
+      [
+        81,
+        134,
+        63,
+        125
+      ],
+      [
+        63,
+        125,
+        3,
+        158
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_8_East.png": {
@@ -34416,8 +36219,33 @@
       114
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        41,
+        82,
+        72,
+        100
+      ],
+      [
+        72,
+        100,
+        99,
+        78
+      ],
+      [
+        99,
+        78,
+        70,
+        62
+      ],
+      [
+        70,
+        62,
+        41,
+        82
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_8_North.png": {
@@ -34434,8 +36262,33 @@
       109
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        29,
+        70,
+        54,
+        85
+      ],
+      [
+        54,
+        85,
+        75,
+        68
+      ],
+      [
+        75,
+        68,
+        53,
+        55
+      ],
+      [
+        53,
+        55,
+        29,
+        70
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_8_South.png": {
@@ -34452,8 +36305,39 @@
       121
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        47,
+        82,
+        60,
+        99
+      ],
+      [
+        60,
+        99,
+        90,
+        93
+      ],
+      [
+        90,
+        93,
+        92,
+        67
+      ],
+      [
+        92,
+        67,
+        64,
+        58
+      ],
+      [
+        64,
+        58,
+        47,
+        82
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_8_West.png": {
@@ -34470,8 +36354,39 @@
       109
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        28,
+        77,
+        72,
+        93
+      ],
+      [
+        72,
+        93,
+        105,
+        77
+      ],
+      [
+        105,
+        77,
+        94,
+        49
+      ],
+      [
+        94,
+        49,
+        59,
+        46
+      ],
+      [
+        59,
+        46,
+        28,
+        77
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_1_Variation_9_East.png": {
@@ -34632,9 +36547,22 @@
       119
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        11,
+        108,
+        82,
+        76
+      ],
+      [
+        82,
+        76,
+        14,
+        45
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_11_North.png": {
     "propId": "wall_b11_n",
@@ -34650,9 +36578,22 @@
       88
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        13,
+        79,
+        72,
+        49
+      ],
+      [
+        72,
+        49,
+        128,
+        78
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_11_South.png": {
     "propId": "wall_b11_s",
@@ -34668,9 +36609,22 @@
       92
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        16,
+        54,
+        81,
+        82
+      ],
+      [
+        81,
+        82,
+        140,
+        51
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_11_West.png": {
     "propId": "wall_b11_w",
@@ -34686,9 +36640,22 @@
       115
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        79,
+        107,
+        19,
+        79
+      ],
+      [
+        19,
+        79,
+        81,
+        48
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_1_East.png": {
     "propId": "wall_b1_e",
@@ -34928,8 +36895,15 @@
       108
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        12,
+        102,
+        82,
+        67
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_3_North.png": {
@@ -34946,8 +36920,15 @@
       108
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        11,
+        69,
+        84,
+        102
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_3_South.png": {
@@ -34964,8 +36945,15 @@
       107
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        11,
+        67,
+        82,
+        100
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_3_West.png": {
@@ -34982,8 +36970,15 @@
       107
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        16,
+        100,
+        85,
+        66
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_4_East.png": {
@@ -35000,8 +36995,15 @@
       156
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        23,
+        143,
+        91,
+        111
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_4_North.png": {
@@ -35018,8 +37020,15 @@
       156
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        23,
+        111,
+        92,
+        145
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_4_South.png": {
@@ -35036,8 +37045,15 @@
       156
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        23,
+        109,
+        95,
+        144
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_4_West.png": {
@@ -35054,8 +37070,15 @@
       156
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        24,
+        143,
+        94,
+        110
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_2_Variation_5_East.png": {
@@ -35072,9 +37095,16 @@
       94
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        14,
+        72,
+        87,
+        45
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_5_North.png": {
     "propId": "wall_b5_n",
@@ -35090,9 +37120,16 @@
       112
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        11,
+        73,
+        82,
+        105
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_5_South.png": {
     "propId": "wall_b5_s",
@@ -35108,9 +37145,16 @@
       94
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        31,
+        44,
+        110,
+        74
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_5_West.png": {
     "propId": "wall_b5_w",
@@ -35126,9 +37170,16 @@
       111
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        40,
+        101,
+        106,
+        68
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_6_East.png": {
     "propId": "wall_b6_e",
@@ -35144,9 +37195,16 @@
       103
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        31,
+        84,
+        64,
+        72
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_6_North.png": {
     "propId": "wall_b6_n",
@@ -35162,9 +37220,16 @@
       100
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        32,
+        71,
+        71,
+        80
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_6_South.png": {
     "propId": "wall_b6_s",
@@ -35180,9 +37245,16 @@
       101
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        30,
+        72,
+        71,
+        83
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_6_West.png": {
     "propId": "wall_b6_w",
@@ -35198,9 +37270,16 @@
       103
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        29,
+        81,
+        63,
+        69
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_7_East.png": {
     "propId": "wall_b7_e",
@@ -35216,9 +37295,16 @@
       96
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        15,
+        85,
+        86,
+        51
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_7_North.png": {
     "propId": "wall_b7_n",
@@ -35234,9 +37320,16 @@
       93
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        15,
+        50,
+        83,
+        83
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_7_South.png": {
     "propId": "wall_b7_s",
@@ -35252,9 +37345,16 @@
       93
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        19,
+        53,
+        87,
+        84
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_7_West.png": {
     "propId": "wall_b7_w",
@@ -35270,9 +37370,16 @@
       92
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        13,
+        82,
+        82,
+        48
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_8_East.png": {
     "propId": "wall_b8_e",
@@ -35288,9 +37395,16 @@
       95
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        16,
+        84,
+        85,
+        50
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_8_North.png": {
     "propId": "wall_b8_n",
@@ -35306,9 +37420,16 @@
       93
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        15,
+        50,
+        84,
+        84
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_8_South.png": {
     "propId": "wall_b8_s",
@@ -35324,9 +37445,16 @@
       93
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        17,
+        50,
+        88,
+        85
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_8_West.png": {
     "propId": "wall_b8_w",
@@ -35342,9 +37470,16 @@
       92
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        15,
+        84,
+        82,
+        49
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_9_East.png": {
     "propId": "wall_b9_e",
@@ -35360,9 +37495,16 @@
       95
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        16,
+        85,
+        89,
+        51
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_9_North.png": {
     "propId": "wall_b9_n",
@@ -35378,9 +37520,16 @@
       93
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        15,
+        51,
+        84,
+        83
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_9_South.png": {
     "propId": "wall_b9_s",
@@ -35396,9 +37545,16 @@
       93
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        19,
+        51,
+        89,
+        85
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_2_Variation_9_West.png": {
     "propId": "wall_b9_w",
@@ -35414,9 +37570,16 @@
       92
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
-    "low": false
+    "segments": [
+      [
+        83,
+        49,
+        14,
+        82
+      ]
+    ],
+    "edited": true,
+    "low": true
   },
   "static/Environment/Wall/Type_3_Variation_1_East.png": {
     "propId": "wall_c1_e",
@@ -35432,8 +37595,15 @@
       167
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        9,
+        159,
+        75,
+        124
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_1_North.png": {
@@ -35450,8 +37620,15 @@
       165
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        122,
+        78,
+        158
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_1_South.png": {
@@ -35468,8 +37645,15 @@
       166
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        5,
+        124,
+        75,
+        159
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_1_West.png": {
@@ -35486,8 +37670,15 @@
       165
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        6,
+        158,
+        76,
+        123
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_2_East.png": {
@@ -35504,8 +37695,21 @@
       168
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        7,
+        125,
+        66,
+        158
+      ],
+      [
+        66,
+        158,
+        127,
+        126
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_2_North.png": {
@@ -35522,8 +37726,21 @@
       189
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        7,
+        183,
+        76,
+        147
+      ],
+      [
+        76,
+        147,
+        6,
+        118
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_2_South.png": {
@@ -35540,8 +37757,27 @@
       190
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        75,
+        180,
+        9,
+        152
+      ],
+      [
+        9,
+        152,
+        64,
+        120
+      ],
+      [
+        64,
+        120,
+        75,
+        130
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_2_West.png": {
@@ -35558,8 +37794,21 @@
       165
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        7,
+        157,
+        66,
+        126
+      ],
+      [
+        66,
+        126,
+        125,
+        156
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_3_East.png": {
@@ -35576,8 +37825,15 @@
       164
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        10,
+        156,
+        70,
+        126
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_3_North.png": {
@@ -35594,8 +37850,15 @@
       162
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        6,
+        127,
+        68,
+        157
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_3_South.png": {
@@ -35612,8 +37875,15 @@
       163
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        67,
+        158,
+        5,
+        127
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_3_West.png": {
@@ -35630,8 +37900,15 @@
       161
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        67,
+        123,
+        8,
+        154
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_4_East.png": {
@@ -35648,8 +37925,15 @@
       167
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        5,
+        159,
+        77,
+        125
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_4_North.png": {
@@ -35666,8 +37950,15 @@
       165
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        122,
+        77,
+        159
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_4_South.png": {
@@ -35684,8 +37975,15 @@
       166
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        4,
+        121,
+        75,
+        158
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_4_West.png": {
@@ -35702,8 +38000,15 @@
       165
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        6,
+        156,
+        77,
+        124
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_3_Variation_5_East.png": {
@@ -35864,8 +38169,21 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        2,
+        133,
+        67,
+        166
+      ],
+      [
+        67,
+        166,
+        133,
+        133
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_10_North.png": {
@@ -35882,8 +38200,21 @@
       193
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        14,
+        187,
+        88,
+        152
+      ],
+      [
+        88,
+        152,
+        14,
+        130
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_10_South.png": {
@@ -35900,8 +38231,21 @@
       194
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        80,
+        188,
+        11,
+        157
+      ],
+      [
+        11,
+        157,
+        74,
+        113
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_10_West.png": {
@@ -35918,8 +38262,45 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        163,
+        15,
+        170
+      ],
+      [
+        15,
+        170,
+        65,
+        146
+      ],
+      [
+        65,
+        146,
+        116,
+        170
+      ],
+      [
+        116,
+        170,
+        134,
+        159
+      ],
+      [
+        134,
+        159,
+        66,
+        129
+      ],
+      [
+        66,
+        129,
+        1,
+        163
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_11_East.png": {
@@ -35936,8 +38317,45 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        135,
+        67,
+        171
+      ],
+      [
+        67,
+        171,
+        135,
+        134
+      ],
+      [
+        135,
+        134,
+        113,
+        124
+      ],
+      [
+        113,
+        124,
+        68,
+        147
+      ],
+      [
+        68,
+        147,
+        16,
+        125
+      ],
+      [
+        16,
+        125,
+        0,
+        135
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_11_North.png": {
@@ -35954,8 +38372,45 @@
       193
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        183,
+        18,
+        192
+      ],
+      [
+        18,
+        192,
+        91,
+        158
+      ],
+      [
+        91,
+        158,
+        18,
+        132
+      ],
+      [
+        18,
+        132,
+        11,
+        144
+      ],
+      [
+        11,
+        144,
+        59,
+        158
+      ],
+      [
+        59,
+        158,
+        0,
+        183
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_11_South.png": {
@@ -35972,8 +38427,45 @@
       194
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        72,
+        192,
+        89,
+        182
+      ],
+      [
+        89,
+        182,
+        40,
+        153
+      ],
+      [
+        40,
+        153,
+        84,
+        132
+      ],
+      [
+        84,
+        132,
+        62,
+        121
+      ],
+      [
+        62,
+        121,
+        0,
+        159
+      ],
+      [
+        0,
+        159,
+        72,
+        192
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_11_West.png": {
@@ -35990,8 +38482,45 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        161,
+        17,
+        169
+      ],
+      [
+        17,
+        169,
+        66,
+        142
+      ],
+      [
+        66,
+        142,
+        116,
+        169
+      ],
+      [
+        116,
+        169,
+        134,
+        161
+      ],
+      [
+        134,
+        161,
+        68,
+        123
+      ],
+      [
+        68,
+        123,
+        -1,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_12_East.png": {
@@ -36008,8 +38537,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        161,
+        16,
+        170
+      ],
+      [
+        16,
+        170,
+        86,
+        135
+      ],
+      [
+        86,
+        135,
+        72,
+        127
+      ],
+      [
+        72,
+        127,
+        1,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_12_North.png": {
@@ -36026,8 +38580,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        135,
+        18,
+        124
+      ],
+      [
+        18,
+        124,
+        90,
+        158
+      ],
+      [
+        90,
+        158,
+        68,
+        169
+      ],
+      [
+        68,
+        169,
+        0,
+        135
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_12_South.png": {
@@ -36044,8 +38623,33 @@
       169
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        136,
+        70,
+        168
+      ],
+      [
+        70,
+        168,
+        87,
+        158
+      ],
+      [
+        87,
+        158,
+        24,
+        124
+      ],
+      [
+        24,
+        124,
+        -1,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_12_West.png": {
@@ -36062,8 +38666,33 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        162,
+        18,
+        170
+      ],
+      [
+        18,
+        170,
+        86,
+        135
+      ],
+      [
+        86,
+        135,
+        68,
+        127
+      ],
+      [
+        68,
+        127,
+        1,
+        162
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_13_East.png": {
@@ -36080,8 +38709,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        159,
+        18,
+        168
+      ],
+      [
+        18,
+        168,
+        88,
+        133
+      ],
+      [
+        88,
+        133,
+        67,
+        124
+      ],
+      [
+        67,
+        124,
+        0,
+        159
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_13_North.png": {
@@ -36098,8 +38752,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        135,
+        69,
+        169
+      ],
+      [
+        69,
+        169,
+        87,
+        160
+      ],
+      [
+        87,
+        160,
+        16,
+        126
+      ],
+      [
+        16,
+        126,
+        -1,
+        135
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_13_South.png": {
@@ -36116,8 +38795,33 @@
       169
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        134,
+        69,
+        168
+      ],
+      [
+        69,
+        168,
+        87,
+        158
+      ],
+      [
+        87,
+        158,
+        20,
+        126
+      ],
+      [
+        20,
+        126,
+        1,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_13_West.png": {
@@ -36134,8 +38838,33 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        162,
+        17,
+        170
+      ],
+      [
+        17,
+        170,
+        87,
+        136
+      ],
+      [
+        87,
+        136,
+        67,
+        127
+      ],
+      [
+        67,
+        127,
+        1,
+        162
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_14_East.png": {
@@ -36152,8 +38881,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        161,
+        18,
+        170
+      ],
+      [
+        18,
+        170,
+        87,
+        135
+      ],
+      [
+        87,
+        135,
+        67,
+        127
+      ],
+      [
+        67,
+        127,
+        -1,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_14_North.png": {
@@ -36170,8 +38924,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        134,
+        70,
+        169
+      ],
+      [
+        70,
+        169,
+        89,
+        159
+      ],
+      [
+        89,
+        159,
+        21,
+        127
+      ],
+      [
+        21,
+        127,
+        1,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_14_South.png": {
@@ -36188,8 +38967,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        134,
+        70,
+        169
+      ],
+      [
+        70,
+        169,
+        88,
+        159
+      ],
+      [
+        88,
+        159,
+        20,
+        124
+      ],
+      [
+        20,
+        124,
+        0,
+        134
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_14_West.png": {
@@ -36206,8 +39010,33 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        160,
+        18,
+        170
+      ],
+      [
+        18,
+        170,
+        87,
+        135
+      ],
+      [
+        87,
+        135,
+        64,
+        125
+      ],
+      [
+        64,
+        125,
+        0,
+        160
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_15_East.png": {
@@ -36224,8 +39053,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        161,
+        17,
+        168
+      ],
+      [
+        17,
+        168,
+        87,
+        135
+      ],
+      [
+        87,
+        135,
+        65,
+        126
+      ],
+      [
+        65,
+        126,
+        0,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_15_North.png": {
@@ -36242,8 +39096,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        135,
+        69,
+        170
+      ],
+      [
+        69,
+        170,
+        88,
+        160
+      ],
+      [
+        88,
+        160,
+        16,
+        125
+      ],
+      [
+        16,
+        125,
+        -1,
+        135
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_15_South.png": {
@@ -36260,8 +39139,33 @@
       169
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        135,
+        70,
+        170
+      ],
+      [
+        70,
+        170,
+        88,
+        160
+      ],
+      [
+        88,
+        160,
+        19,
+        125
+      ],
+      [
+        19,
+        125,
+        0,
+        135
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_15_West.png": {
@@ -36278,8 +39182,33 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        161,
+        16,
+        169
+      ],
+      [
+        16,
+        169,
+        87,
+        135
+      ],
+      [
+        87,
+        135,
+        66,
+        124
+      ],
+      [
+        66,
+        124,
+        -1,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_16_East.png": {
@@ -36296,8 +39225,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        161,
+        17,
+        171
+      ],
+      [
+        17,
+        171,
+        88,
+        136
+      ],
+      [
+        88,
+        136,
+        68,
+        127
+      ],
+      [
+        68,
+        127,
+        -1,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_16_North.png": {
@@ -36314,8 +39268,33 @@
       170
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        1,
+        136,
+        67,
+        169
+      ],
+      [
+        67,
+        169,
+        87,
+        160
+      ],
+      [
+        87,
+        160,
+        20,
+        126
+      ],
+      [
+        20,
+        126,
+        1,
+        136
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_16_South.png": {
@@ -36332,8 +39311,33 @@
       169
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        133,
+        68,
+        167
+      ],
+      [
+        68,
+        167,
+        90,
+        155
+      ],
+      [
+        90,
+        155,
+        16,
+        120
+      ],
+      [
+        16,
+        120,
+        -1,
+        133
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_16_West.png": {
@@ -36350,8 +39354,33 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -4,
+        161,
+        18,
+        171
+      ],
+      [
+        18,
+        171,
+        86,
+        135
+      ],
+      [
+        86,
+        135,
+        63,
+        126
+      ],
+      [
+        63,
+        126,
+        -4,
+        161
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_17_East.png": {
@@ -36584,8 +39613,33 @@
       172
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        156,
+        29,
+        171
+      ],
+      [
+        29,
+        171,
+        98,
+        134
+      ],
+      [
+        98,
+        134,
+        70,
+        120
+      ],
+      [
+        70,
+        120,
+        -1,
+        156
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_1_North.png": {
@@ -36602,8 +39656,33 @@
       171
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        137,
+        68,
+        170
+      ],
+      [
+        68,
+        170,
+        98,
+        155
+      ],
+      [
+        98,
+        155,
+        29,
+        124
+      ],
+      [
+        29,
+        124,
+        0,
+        137
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_1_South.png": {
@@ -36620,8 +39699,33 @@
       172
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        137,
+        68,
+        171
+      ],
+      [
+        68,
+        171,
+        98,
+        155
+      ],
+      [
+        98,
+        155,
+        26,
+        121
+      ],
+      [
+        26,
+        121,
+        0,
+        137
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_1_West.png": {
@@ -36638,8 +39742,33 @@
       173
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        0,
+        157,
+        30,
+        173
+      ],
+      [
+        30,
+        173,
+        99,
+        138
+      ],
+      [
+        99,
+        138,
+        71,
+        122
+      ],
+      [
+        71,
+        122,
+        0,
+        157
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_2_East.png": {
@@ -36656,8 +39785,45 @@
       174
     ],
     "worldWidth": 1.5,
-    "segments": [],
-    "edited": false,
+    "segments": [
+      [
+        -1,
+        137,
+        72,
+        173
+      ],
+      [
+        72,
+        173,
+        145,
+        136
+      ],
+      [
+        145,
+        136,
+        123,
+        128
+      ],
+      [
+        123,
+        128,
+        71,
+        149
+      ],
+      [
+        71,
+        149,
+        18,
+        123
+      ],
+      [
+        18,
+        123,
+        -1,
+        137
+      ]
+    ],
+    "edited": true,
     "low": false
   },
   "static/Environment/Wall/Type_4_Variation_2_North.png": {

@@ -78,8 +78,8 @@ def player_anchor_offset() -> tuple[float, float]:
 
 
 def depth_sort_entity(feet_gx: float, feet_gy: float) -> int:
-    max_sum = float(GRID_MIN_X + GRID_MIN_Y + GRID_WIDTH + GRID_HEIGHT - 2)
-    return DEPTH_ENTITY_LAYER + int((max_sum - (feet_gx + feet_gy)) * DEPTH_TILE_STRIDE)
+    min_sum = float(GRID_MIN_X + GRID_MIN_Y)
+    return DEPTH_ENTITY_LAYER + int(((feet_gx + feet_gy) - min_sum) * DEPTH_TILE_STRIDE)
 
 
 def format_player_node(uid: int, level_uid: int, texture_id: int) -> str:

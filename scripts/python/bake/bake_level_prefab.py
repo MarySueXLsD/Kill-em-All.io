@@ -452,8 +452,7 @@ class Writer:
         pos_x = feet_wx + px_off_x * sw / cw
         pos_y = feet_wy + px_off_y * sh / ch
         if render_order is None:
-            max_sum = float(GRID_MIN_X + GRID_MIN_Y + GRID_WIDTH + GRID_HEIGHT - 2)
-            render_order = DEPTH_ENTITY_LAYER + int((max_sum - (feet_gx + feet_gy)) * DEPTH_TILE_STRIDE)
+            render_order = depth_sort_entity_from_grid(feet_gx, feet_gy)
         path = PATHS[prop_id]
         comp = self.sprite_renderer_block((0.0, 0.0, 1.0, 1.0), render_order, path)
         comp += f'\nPropFootprint{{propId:t="{prop_id}";}}'
@@ -620,16 +619,16 @@ def depth_sort_key(gx: float, gy: float) -> int:
 
 
 def depth_sort_entity_from_grid(feet_gx: float, feet_gy: float) -> int:
-    max_sum = float(GRID_MIN_X + GRID_MIN_Y + GRID_WIDTH + GRID_HEIGHT - 2)
-    return DEPTH_ENTITY_LAYER + int((max_sum - (feet_gx + feet_gy)) * DEPTH_TILE_STRIDE)
+    min_sum = float(GRID_MIN_X + GRID_MIN_Y)
+    return DEPTH_ENTITY_LAYER + int(((feet_gx + feet_gy) - min_sum) * DEPTH_TILE_STRIDE)
 
 
 def depth_sort_foreground_overlay_order() -> int:
-    min_feet_sum = -0.5 + -0.5
+    min_sum = float(GRID_MIN_X + GRID_MIN_Y)
     max_sum = float(GRID_MIN_X + GRID_MIN_Y + GRID_WIDTH + GRID_HEIGHT - 2)
     return (
         DEPTH_ENTITY_LAYER
-        + int((max_sum - min_feet_sum) * DEPTH_TILE_STRIDE)
+        + int((max_sum - min_sum) * DEPTH_TILE_STRIDE)
         + DEPTH_FOREGROUND_OVERLAY_HEADROOM
     )
 

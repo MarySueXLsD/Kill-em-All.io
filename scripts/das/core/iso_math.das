@@ -80,11 +80,16 @@ def player_feet_from_scene_node() : float2 {
 }
 
 
+def public entity_legs_collision_half_width(worldHeight : float) : float {
+    return entity_legs_box_size_world(worldHeight).x * 0.5
+}
+
+
 def grid_feet_margin() : float {
     let halfW = tile_half_width()
     let halfH = tile_half_height()
     let gridStep = sqrt(halfW * halfW + halfH * halfH)
-    return ENTITY_FEET_RADIUS / gridStep
+    return entity_legs_collision_half_width(PLAYER_WORLD_HEIGHT) / gridStep
 }
 
 
@@ -152,36 +157,67 @@ def public constrain_feet_move_to_grid(from, to : float2) : float2 {
 }
 
 
+def entity_grid_depth_min_sum() : float {
+    return float(activeGridMinX + activeGridMinY)
+}
+
+
+def entity_grid_depth_max_sum() : float {
+    return float(activeGridMinX + activeGridMinY + activeGridWidth + activeGridHeight - 2)
+}
+
+
+def public entity_grid_depth_sum(pos : float2) : float {
+    let grid = world_to_grid(pos.x, pos.y)
+    return grid.x + grid.y
+}
+
+
 def depth_sort_key(gx, gy : float) : int {
-    // Lower gx + gy is closer to the camera (farther down on screen) and draws on top.
-    let maxSum = float(activeGridMinX + activeGridMinY + activeGridWidth + activeGridHeight - 2)
+    // Ground tiles: lower gx+gy draws on top at shared diamond edges (opposite of entity Y-sort).
+    let maxSum = entity_grid_depth_max_sum()
     return int(maxSum - (gx + gy))
 }
 
 
+def depth_sort_north_ref_y() : float {
+    return grid_to_world(grid_feet_max_gx(), grid_feet_max_gy()).y
+}
+
+
+def public depth_sort_from_sprite_bottom(yBottom : float) : int {
+    // yBottom = feet Y for entities, collision-ground Y for props.
+    // Lower world Y (more south) draws in front (higher renderOrder).
+    // Reference from the north edge so orders stay >= DEPTH_ENTITY_LAYER (above ground tiles).
+    let northRefY = depth_sort_north_ref_y()
+    let order = DEPTH_ENTITY_LAYER + int((northRefY - yBottom) * float(DEPTH_WORLD_Y_SORT_SCALE))
+    if (order < DEPTH_ENTITY_LAYER) {
+        return DEPTH_ENTITY_LAYER
+    }
+    return order
+}
+
+
 def depth_sort_entity_from_world(pos : float2) : int {
-    let grid = world_to_grid(pos.x, pos.y)
-    let maxSum = float(activeGridMinX + activeGridMinY + activeGridWidth + activeGridHeight - 2)
-    let sum = grid.x + grid.y
-    return DEPTH_ENTITY_LAYER + int((maxSum - sum) * float(DEPTH_TILE_STRIDE))
+    return depth_sort_from_sprite_bottom(pos.y)
 }
 
 
 def depth_sort_corpse_from_world(pos : float2) : int {
-    let grid = world_to_grid(pos.x, pos.y)
-    let maxSum = float(activeGridMinX + activeGridMinY + activeGridWidth + activeGridHeight - 2)
-    let sum = grid.x + grid.y
+    let sum = entity_grid_depth_sum(pos)
+    let minSum = entity_grid_depth_min_sum()
+    let maxSum = entity_grid_depth_max_sum()
     let corpseDepth = DEPTH_CORPSE_LAYER + int((maxSum - sum) * float(DEPTH_CORPSE_STRIDE))
-    let maxCorpseDepth = DEPTH_ENTITY_LAYER + DEPTH_BORDER_WALL_BELOW_BIAS - 1
+    let southFeet = grid_to_world(grid_feet_min(), grid_feet_min())
+    let maxCorpseDepth = depth_sort_entity_from_world(southFeet) + DEPTH_BORDER_WALL_BELOW_BIAS - 1
     return min(corpseDepth, maxCorpseDepth)
 }
 
 
 def public depth_sort_foreground_overlay_order() : int {
-    let maxSum = float(activeGridMinX + activeGridMinY + activeGridWidth + activeGridHeight - 2)
-    let minFeetSum = grid_feet_min() + grid_feet_min()
+    let southFeet = grid_to_world(grid_feet_min(), grid_feet_min())
     // Above Y-sorted player, enemies (+1), projectiles, and AOE overlays (+40).
-    return DEPTH_ENTITY_LAYER + int((maxSum - minFeetSum) * float(DEPTH_TILE_STRIDE)) + DEPTH_FOREGROUND_OVERLAY_HEADROOM
+    return depth_sort_entity_from_world(southFeet) + DEPTH_FOREGROUND_OVERLAY_HEADROOM
 }
 
 
@@ -274,6 +310,11 @@ def public collision_y_bounds_overlap(a, b : CollisionYBounds) : bool {
 }
 
 
+def public collision_y_ranges_overlap(a, b : CollisionYBounds) : bool {
+    return a.yMax >= b.yMin && a.yMin <= b.yMax
+}
+
+
 def public collision_y_bounds_expand(bounds : CollisionYBounds; margin : float) : CollisionYBounds {
     return CollisionYBounds(
         yMin = bounds.yMin - margin,
@@ -284,12 +325,58 @@ def public collision_y_bounds_expand(bounds : CollisionYBounds; margin : float) 
 }
 
 
+def point_in_collision_y_bounds(p : float2; bounds : CollisionYBounds) : bool {
+    return p.x >= bounds.xMin && p.x <= bounds.xMax && p.y >= bounds.yMin && p.y <= bounds.yMax
+}
+
+
+def cross2d(a, b : float2) : float {
+    return a.x * b.y - a.y * b.x
+}
+
+
+def segments_intersect_2d(p1, p2, p3, p4 : float2) : bool {
+    let d1 = cross2d(p3 - p1, p2 - p1)
+    let d2 = cross2d(p4 - p1, p2 - p1)
+    let d3 = cross2d(p1 - p3, p4 - p3)
+    let d4 = cross2d(p2 - p3, p4 - p3)
+    if (((d1 > 0.0 && d2 < 0.0) || (d1 < 0.0 && d2 > 0.0)) && ((d3 > 0.0 && d4 < 0.0) || (d3 < 0.0 && d4 > 0.0))) {
+        return true
+    }
+    return false
+}
+
+
+def public segment_intersects_collision_y_bounds(segA, segB : float2; bounds : CollisionYBounds) : bool {
+    if (point_in_collision_y_bounds(segA, bounds) || point_in_collision_y_bounds(segB, bounds)) {
+        return true
+    }
+    let x0 = bounds.xMin
+    let x1 = bounds.xMax
+    let y0 = bounds.yMin
+    let y1 = bounds.yMax
+    if (segments_intersect_2d(segA, segB, float2(x0, y0), float2(x1, y0))) {
+        return true
+    }
+    if (segments_intersect_2d(segA, segB, float2(x1, y0), float2(x1, y1))) {
+        return true
+    }
+    if (segments_intersect_2d(segA, segB, float2(x1, y1), float2(x0, y1))) {
+        return true
+    }
+    if (segments_intersect_2d(segA, segB, float2(x0, y1), float2(x0, y0))) {
+        return true
+    }
+    return false
+}
+
+
 def entity_legs_box_bounds(feet : float2; worldHeight : float) : LegsBoxBounds {
     let size = entity_legs_box_size_world(worldHeight)
     let halfW = size.x * 0.5
     return LegsBoxBounds(
-        minPt = float3(feet.x - halfW, feet.y, DEBUG_DRAW_Z),
-        maxPt = float3(feet.x + halfW, feet.y + size.y, DEBUG_DRAW_Z + 0.01)
+        minPt = float3(feet.x - halfW, feet.y - size.y, DEBUG_DRAW_Z),
+        maxPt = float3(feet.x + halfW, feet.y, DEBUG_DRAW_Z + 0.01)
     )
 }
 

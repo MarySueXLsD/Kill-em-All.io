@@ -87,8 +87,8 @@ def grid_to_world(gx: float, gy: float) -> tuple[float, float]:
 
 
 def depth_sort(gx: float, gy: float) -> int:
-    max_sum = GRID_MIN_X + GRID_MIN_Y + GRID_WIDTH + GRID_HEIGHT - 2
-    return DEPTH_ENTITY_LAYER + int((max_sum - (gx + gy)) * DEPTH_TILE_STRIDE)
+    min_sum = float(GRID_MIN_X + GRID_MIN_Y)
+    return DEPTH_ENTITY_LAYER + int(((gx + gy) - min_sum) * DEPTH_TILE_STRIDE)
 
 
 def image_size(texture_rel: str) -> tuple[int, int]:

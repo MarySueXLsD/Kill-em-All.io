@@ -91,7 +91,7 @@ def attack_facing_dir(row : int) : float2 {
 
 
 def public attack_slash_hit_radius(frameRadius : float) : float {
-    return frameRadius * PLAYER_ATTACK_SLASH_RADIUS_SCALE + ENTITY_FEET_RADIUS + PLAYER_ATTACK_HIT_FEET_PAD
+    return frameRadius * PLAYER_ATTACK_SLASH_RADIUS_SCALE + entity_legs_collision_half_width(ENEMY_WORLD_HEIGHT) + PLAYER_ATTACK_HIT_FEET_PAD
 }
 
 

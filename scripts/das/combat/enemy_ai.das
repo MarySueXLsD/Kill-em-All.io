@@ -282,7 +282,7 @@ class EnemyController : Component {
             clear_flank_commitment()
             return goal
         }
-        if (!blocks_feet_path(position, goal)) {
+        if (!blocks_feet_path(position, goal, ENEMY_WORLD_HEIGHT)) {
             clear_flank_commitment()
             cachedApproachGoal = goal
             cachedApproachTarget = goal
@@ -305,7 +305,7 @@ class EnemyController : Component {
         }
         pathDetourTimer = AI_PATH_RECOMPUTE_INTERVAL
         cachedApproachGoal = goal
-        cachedApproachTarget = pick_obstacle_route(position, goal, others, cachedFlankSign)
+        cachedApproachTarget = pick_obstacle_route(position, goal, others, cachedFlankSign, ENEMY_WORLD_HEIGHT)
         cachedApproachValid = true
         return cachedApproachTarget
     }
@@ -335,7 +335,7 @@ class EnemyController : Component {
             return
         }
         var dir = toTarget / dist
-        let routingAroundCover = blocks_feet_path(position, faceTarget)
+        let routingAroundCover = blocks_feet_path(position, faceTarget, ENEMY_WORLD_HEIGHT)
         if (!routingAroundCover) {
             dir = steer_away_from_live_entities(position, dir, nodeId)
         }
@@ -522,7 +522,7 @@ class EnemyController : Component {
 
     def apply_feet_move(desired : float2) {
         ensure_enemy_frame_cache(enemyFrameStamp)
-        var pos = resolve_feet_move(position, desired, cachedStaticBlockers)
+        var pos = resolve_legs_feet_move(position, desired, ENEMY_WORLD_HEIGHT, cachedStaticBlockers)
         if (playerNode.isAlive) {
             var playerBlockers : array<float2>
             push(playerBlockers, playerWorldPosition)
@@ -533,7 +533,7 @@ class EnemyController : Component {
     }
 
     def apply_feet_move_with_blockers(desired : float2; blockers : array<float2>) {
-        position = resolve_feet_move(position, desired, blockers)
+        position = resolve_legs_feet_move(position, desired, ENEMY_WORLD_HEIGHT, blockers)
     }
 
     def movement_step_blocked(before : float2; speed, dt : float) : bool {
@@ -577,7 +577,7 @@ class EnemyController : Component {
         hp = maxHp
         healthBar = create_enemy_health_bar(kind)
         ensure_enemy_frame_cache(enemyFrameStamp)
-        position = resolve_feet_move(position, position, cachedStaticBlockers)
+        position = resolve_legs_feet_move(position, position, ENEMY_WORLD_HEIGHT, cachedStaticBlockers)
         sync_health_bar()
         if (kind == 7) {
             bossOpeningAoePending = true
@@ -598,7 +598,7 @@ class EnemyController : Component {
         let anchor = enemy_anchor_offset(layout)
         let depth = dead ? depth_sort_corpse_from_world(position) : depth_sort_entity_from_world(position)
 
-        nodeId.localPosition = float3(position.x + anchor.x, position.y + anchor.y, 0.1)
+        nodeId.localPosition = float3(position.x + anchor.x, position.y + anchor.y, SPRITE_DRAW_Z)
         nodeId.localScale = float3(layout.scale.x, layout.scale.y, 1.0)
         nodeId?.SpriteRenderer.textureId = tex
         nodeId?.SpriteRenderer.uvRect = layout.uv
@@ -995,7 +995,6 @@ def spawn_enemy_spell_volley(fromFeet : float2; aimDir : float2; speed : float; 
 def refresh_enemy_frame_cache() {
     clear(cachedStaticBlockers)
     append_grid_wall_blockers(cachedStaticBlockers)
-    append_prop_blockers(cachedStaticBlockers)
 }
 
 
@@ -1247,7 +1246,7 @@ def public apply_player_aoe_hits(
     if (!enemiesRootNode.isAlive || damage <= 0) {
         return
     }
-    let hitReach = hitRadius + ENTITY_FEET_RADIUS
+    let hitReach = hitRadius + entity_legs_collision_half_width(PLAYER_WORLD_HEIGHT)
     let hitReachSq = hitReach * hitReach
     var totalDamage = 0
     for (i in range(cached_live_enemy_count())) {

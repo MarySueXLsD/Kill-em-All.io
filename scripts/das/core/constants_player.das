@@ -14,11 +14,13 @@ let public {
     // Corpses Y-sort in a band below every prop/entity (min entity ~950 with wall bias).
     DEPTH_CORPSE_LAYER = 400
     DEPTH_CORPSE_STRIDE = 3
-    ENTITY_FEET_RADIUS = 0.32
-    ENTITY_LEGS_BOX_WIDTH_PX = 26.0
-    ENTITY_LEGS_BOX_HEIGHT_PX = 41.0
-    // Shift sprite art upward relative to the feet anchor (not the legs/feet hit circle).
+    // Narrow feet/legs hit zone at the ground anchor (not full sprite height).
+    ENTITY_LEGS_BOX_WIDTH_PX = 12.0
+    ENTITY_LEGS_BOX_HEIGHT_PX = 14.0
+    // Shift sprite art upward relative to the feet anchor (not the legs hit box).
     ENTITY_SPRITE_Y_OFFSET_PX = -10.0
+    // Match props (Z=0) so renderOrder alone controls draw order, not node depth.
+    SPRITE_DRAW_Z = 0.0
     DEBUG_DRAW_Z = 0.15
     PLAYER_WORLD_HEIGHT = 4.0
     PLAYER_SHEET_WIDTH = 1845.0
@@ -50,9 +52,9 @@ let public {
     PLAYER_DASH_GHOST_FADE_DURATION = 0.18
     PLAYER_DASH_ANIM_FPS = 24.0
 
-    CAMERA_ORTHO_SIZE = 10.0
-    CAMERA_ORTHO_SIZE_MIN = 10.0
-    CAMERA_ORTHO_SIZE_MAX = 24.0
+    CAMERA_ORTHO_SIZE = 14.0
+    CAMERA_ORTHO_SIZE_MIN = 14.0
+    CAMERA_ORTHO_SIZE_MAX = 28.0
     PLAYER_ATTACK3_PATH = "static/Characters/playable_character_kreol/Attack3.png"
     PLAYER_TAKE_DAMAGE_PATH = "static/Characters/playable_character_kreol/TakeDamage.png"
     PLAYER_MAX_HP = 100

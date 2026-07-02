@@ -1,6 +1,6 @@
 {
-  "baked_at": "2026-06-29T21:49:42Z",
-  "asset_count": 401,
-  "segment_count": 1425,
+  "baked_at": "2026-06-30T20:20:25Z",
+  "asset_count": 573,
+  "segment_count": 1924,
   "source": "tools/collision-editor/collision_data.json"
 }

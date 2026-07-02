@@ -144,7 +144,7 @@ def spawn_enemy(kind : int; spawnPos : float2) {
     let spawnId = enemySpawnSeq
     let node = create_node(NodeData(
         name = "enemy_{kind}_{spawnId}",
-        position = float3(spawnPos.x + anchor.x, spawnPos.y + anchor.y, 0.1),
+        position = float3(spawnPos.x + anchor.x, spawnPos.y + anchor.y, SPRITE_DRAW_Z),
         scale = float3(layout.scale.x, layout.scale.y, 1.0),
         parent = enemiesRootNode
     ))

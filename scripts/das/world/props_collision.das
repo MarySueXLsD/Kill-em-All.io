@@ -50,7 +50,7 @@ def point_inside_sprite_node_bounds(point : float2; node : NodeId; padding : flo
         return false
     }
     let center = node.worldPosition.xy
-    let half = float2(abs(node.worldScale.x), abs(node.worldScale.y)) * 0.5 + padding
+    let half = float2(abs(node.worldScale.x), abs(node.worldScale.y)) * 0.5 + float2(padding)
     return abs(point.x - center.x) <= half.x && abs(point.y - center.y) <= half.y
 }
 
@@ -67,6 +67,36 @@ def public sprite_node_collision_y_bounds(node : NodeId) : CollisionYBounds {
         xMin = center.x - half.x,
         xMax = center.x + half.x
     )
+}
+
+
+// Ground contact for Y-sort: bottom-center of the sprite quad (screen-bottom edge).
+def public prop_sort_world_pos(node : NodeId) : float2 {
+    let bounds = sprite_node_collision_y_bounds(node)
+    return float2((bounds.xMin + bounds.xMax) * 0.5, bounds.yMin)
+}
+
+
+// Collision-volume ground point for Y-sort (preferred over sprite bounds when available).
+def public prop_collision_sort_pos(propIndex : int; node : NodeId) : float2 {
+    if (propIndex >= 0 && propIndex < length(propCollisionBounds)) {
+        let bounds = propCollisionBounds[propIndex]
+        if (bounds.yMax >= bounds.yMin && bounds.xMax >= bounds.xMin) {
+            return float2((bounds.xMin + bounds.xMax) * 0.5, bounds.yMin)
+        }
+    }
+    return prop_sort_world_pos(node)
+}
+
+
+def public prop_collision_bounds_at(propIndex : int; node : NodeId) : CollisionYBounds {
+    if (propIndex >= 0 && propIndex < length(propCollisionBounds)) {
+        let bounds = propCollisionBounds[propIndex]
+        if (bounds.yMax >= bounds.yMin && bounds.xMax >= bounds.xMin) {
+            return bounds
+        }
+    }
+    return sprite_node_collision_y_bounds(node)
 }
 
 
@@ -230,11 +260,38 @@ def segment_hits_projectile_walls(segA, segB : float2; extraRadius : float) : bo
 }
 
 
-def public blocks_feet_path(from, to : float2) : bool {
-    if (point_hits_prop_walls(from, ENTITY_FEET_RADIUS) || point_hits_prop_walls(to, ENTITY_FEET_RADIUS)) {
+def public blocks_feet_path(from, to : float2; worldHeight : float) : bool {
+    return legs_path_blocked(from, to, worldHeight)
+}
+
+
+def legs_hits_prop_walls_at(feet : float2; worldHeight : float) : bool {
+    let bounds = legs_collision_y_bounds(feet, worldHeight)
+    for (i in range(length(propWallSegmentsA))) {
+        let wallA = propWallSegmentsA[i]
+        let wallB = propWallSegmentsB[i]
+        let segMinY = min(wallA.y, wallB.y)
+        let segMaxY = max(wallA.y, wallB.y)
+        if (segMaxY < bounds.yMin || segMinY > bounds.yMax) {
+            continue
+        }
+        if (segment_intersects_collision_y_bounds(wallA, wallB, bounds)) {
+            return true
+        }
+    }
+    return false
+}
+
+
+def public legs_path_blocked(from, to : float2; worldHeight : float) : bool {
+    if (legs_hits_prop_walls_at(to, worldHeight)) {
         return true
     }
-    return segment_hits_prop_walls(from, to, ENTITY_FEET_RADIUS)
+    if (legs_hits_prop_walls_at(from, worldHeight)) {
+        return false
+    }
+    let mid = (from + to) * 0.5
+    return legs_hits_prop_walls_at(mid, worldHeight)
 }
 
 

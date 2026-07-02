@@ -819,6 +819,11 @@ def register_prefab_prop_node(node : NodeId; propId : string) {
     apply_border_wall_render_order(node, feet)
     var collisionBounds = assetIdx >= 0 ? collision_asset_world_y_bounds(assetIdx, feetGrid) : sprite_node_collision_y_bounds(node)
     register_prop_sprite_track(node, feet, projectilePassable, collisionBounds)
+    if (!is_decor_border_wall_name(node.name) && node?.SpriteRenderer != null) {
+        let propIdx = length(propSpriteNodes) - 1
+        let propColl = prop_collision_bounds_at(propIdx, node)
+        node?.SpriteRenderer.renderOrder = depth_sort_from_sprite_bottom(propColl.yMax)
+    }
 }
 
 

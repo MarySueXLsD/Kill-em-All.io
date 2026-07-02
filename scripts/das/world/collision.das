@@ -58,7 +58,7 @@ def public append_grid_wall_blockers(var blockers : array<float2>) {
 
 
 def public entity_min_separation() : float {
-    return ENTITY_FEET_RADIUS * 2.0
+    return entity_legs_box_size_world(PLAYER_WORLD_HEIGHT).x
 }
 
 
@@ -86,10 +86,10 @@ def detour_preferred_side(from, to : float2; dir : float2) : float {
 }
 
 
-def detour_score_waypoint(from, waypoint, goal : float2; blockers : array<float2>; preferredSign, sign : float) : float {
+def detour_score_waypoint(from, waypoint, goal : float2; blockers : array<float2>; preferredSign, sign, worldHeight : float) : float {
     let step = ai_detour_step()
     var score = 0.0
-    if (!blocks_feet_path(waypoint, goal)) {
+    if (!blocks_feet_path(waypoint, goal, worldHeight)) {
         score = AI_FLANK_CLEAR_PATH_BONUS - length(waypoint - goal)
     } else {
         score = length(waypoint - from) * 4.0
@@ -113,19 +113,19 @@ def update_detour_search(
     var state : DetourSearchState;
     from, waypoint, goal : float2;
     blockers : array<float2>;
-    preferredSign, sign : float
+    preferredSign, sign, worldHeight : float
 ) {
     if (!is_feet_in_grid_bounds(waypoint)) {
         return
     }
-    if (blocks_feet_path(from, waypoint)) {
+    if (blocks_feet_path(from, waypoint, worldHeight)) {
         return
     }
     if (length_sq(waypoint - from) < 0.0001) {
         return
     }
     state.found = true
-    let score = detour_score_waypoint(from, waypoint, goal, blockers, preferredSign, sign)
+    let score = detour_score_waypoint(from, waypoint, goal, blockers, preferredSign, sign, worldHeight)
     if (score > state.bestScore) {
         state.bestScore = score
         state.bestPoint = waypoint
@@ -133,8 +133,8 @@ def update_detour_search(
 }
 
 
-def public pick_obstacle_route(from, to : float2; blockers : array<float2>; flankSign : float) : float2 {
-    if (!blocks_feet_path(from, to)) {
+def public pick_obstacle_route(from, to : float2; blockers : array<float2>; flankSign : float; worldHeight : float) : float2 {
+    if (!blocks_feet_path(from, to, worldHeight)) {
         return to
     }
     let toTarget = to - from
@@ -155,13 +155,13 @@ def public pick_obstacle_route(from, to : float2; blockers : array<float2>; flan
         for (forward in range(0, AI_OBSTACLE_ROUTE_FORWARD_STEPS + 1)) {
             for (lat in range(1, AI_OBSTACLE_ROUTE_LATERAL_STEPS + 1)) {
                 let waypoint = from + dir * step * float(forward) + perp * step * float(lat) * sign
-                update_detour_search(state, from, waypoint, to, blockers, preferredSign, sign)
+                update_detour_search(state, from, waypoint, to, blockers, preferredSign, sign, worldHeight)
             }
         }
         for (back in range(1, AI_DETOUR_BACK_STEPS + 1)) {
             for (lat in range(1, AI_OBSTACLE_ROUTE_LATERAL_STEPS + 1)) {
                 let waypoint = from - dir * step * float(back) + perp * step * float(lat) * sign
-                update_detour_search(state, from, waypoint, to, blockers, preferredSign, sign)
+                update_detour_search(state, from, waypoint, to, blockers, preferredSign, sign, worldHeight)
             }
         }
     }
@@ -170,7 +170,7 @@ def public pick_obstacle_route(from, to : float2; blockers : array<float2>; flan
     }
     for (lat in range(1, AI_OBSTACLE_ROUTE_LATERAL_STEPS + 1)) {
         let waypoint = from + perp * step * float(lat) * preferredSign
-        if (is_feet_in_grid_bounds(waypoint) && !blocks_feet_path(from, waypoint)) {
+        if (is_feet_in_grid_bounds(waypoint) && !blocks_feet_path(from, waypoint, worldHeight)) {
             return waypoint
         }
     }
@@ -178,8 +178,8 @@ def public pick_obstacle_route(from, to : float2; blockers : array<float2>; flan
 }
 
 
-def public resolve_approach_target(from, target : float2; blockers : array<float2>; flankSign : float) : float2 {
-    return pick_obstacle_route(from, target, blockers, flankSign)
+def public resolve_approach_target(from, target : float2; blockers : array<float2>; flankSign : float; worldHeight : float) : float2 {
+    return pick_obstacle_route(from, target, blockers, flankSign, worldHeight)
 }
 
 
@@ -373,4 +373,23 @@ def public resolve_feet_move(from, to : float2; blockers : array<float2>) : floa
         pos = clamp_feet_to_grid(pos)
     }
     return clamp_feet_to_grid(pos)
+}
+
+
+def public resolve_legs_feet_move(from, to : float2; worldHeight : float; entityBlockers : array<float2>) : float2 {
+    var pos = constrain_feet_move_for_terrain(from, to)
+    if (legs_path_blocked(from, pos, worldHeight)) {
+        let slideX = float2(pos.x, from.y)
+        if (!legs_path_blocked(from, slideX, worldHeight) && is_feet_in_grid_bounds(slideX)) {
+            pos = slideX
+        } else {
+            let slideY = float2(from.x, pos.y)
+            if (!legs_path_blocked(from, slideY, worldHeight) && is_feet_in_grid_bounds(slideY)) {
+                pos = slideY
+            } else {
+                pos = from
+            }
+        }
+    }
+    return resolve_feet_move(from, pos, entityBlockers)
 }

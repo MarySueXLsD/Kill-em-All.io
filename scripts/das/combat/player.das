@@ -251,7 +251,7 @@ def spawn_dash_ghost(pos : float2; row, col : int) {
 
     let ghostNode = create_node(NodeData(
         name = "dash_ghost",
-        position = float3(pos.x + anchor.x, pos.y + anchor.y, 0.1),
+        position = float3(pos.x + anchor.x, pos.y + anchor.y, SPRITE_DRAW_Z),
         scale = float3(layout.scale.x, layout.scale.y, 1.0),
         parent = mapRootNode
     ))
@@ -399,7 +399,7 @@ class PlayerController : Component {
     def apply_feet_move(desired : float2) {
         ensure_enemy_frame_cache(enemyFrameStamp)
         let blockers = gather_blocking_feet(nodeId)
-        position = resolve_feet_move(position, desired, blockers)
+        position = resolve_legs_feet_move(position, desired, PLAYER_WORLD_HEIGHT, blockers)
         playerWorldPosition = position
     }
 
@@ -675,7 +675,7 @@ class PlayerController : Component {
         let layout = sprite_layout(row, col)
         let anchor = player_anchor_offset(layout)
 
-        nodeId.localPosition = float3(position.x + anchor.x, position.y + anchor.y, 0.1)
+        nodeId.localPosition = float3(position.x + anchor.x, position.y + anchor.y, SPRITE_DRAW_Z)
         nodeId.localScale = float3(layout.scale.x, layout.scale.y, 1.0)
         nodeId?.SpriteRenderer.textureId = tex
         nodeId?.SpriteRenderer.uvRect = layout.uv
@@ -688,7 +688,7 @@ class PlayerController : Component {
         let layout = sprite_layout(row, col)
         let anchor = player_anchor_offset(layout)
 
-        nodeId.localPosition = float3(position.x + anchor.x, position.y + anchor.y, 0.1)
+        nodeId.localPosition = float3(position.x + anchor.x, position.y + anchor.y, SPRITE_DRAW_Z)
         nodeId.localScale = float3(layout.scale.x, layout.scale.y, 1.0)
         nodeId?.SpriteRenderer.uvRect = layout.uv
         nodeId?.SpriteRenderer.useTextureSizeForScaling = false
@@ -720,7 +720,7 @@ def create_runtime_player_fallback() {
 
     playerNode = create_node(NodeData(
         name = "player",
-        position = float3(spawnPos.x + anchor.x, spawnPos.y + anchor.y, 0.1),
+        position = float3(spawnPos.x + anchor.x, spawnPos.y + anchor.y, SPRITE_DRAW_Z),
         scale = float3(layout.scale.x, layout.scale.y, 1.0),
         parent = levelRootNode
     ))

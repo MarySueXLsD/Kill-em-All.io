@@ -3,6 +3,7 @@ require scripts/das/core/constants
 require scripts/das/core/iso_math
 require scripts/das/core/game_state
 require scripts/das/world/props_collision
+require scripts/das/world/props_walls
 require scripts/das/combat/player
 require scripts/das/combat/enemies
 
@@ -10,12 +11,41 @@ module collision_depth_sort public
 
 struct DepthSortEntry {
     node : NodeId
-    bounds : CollisionYBounds
+    spriteBounds : CollisionYBounds
+    collisionBounds : CollisionYBounds
+    groundY : float
     order : int
+    isEntity : bool
 }
 
 
-def run_collision_depth_pass(var entries : array<DepthSortEntry>) {
+def boost_order_in_front(frontOrder, backOrder : int) : int {
+    return max(frontOrder, backOrder + DEPTH_COLLISION_SORT_BIAS)
+}
+
+
+def resolve_entity_entity_pair(ai, aj : int; entryA, entryB : DepthSortEntry; eps : float) : int2 {
+    let aColl = entryA.collisionBounds
+    let bColl = entryB.collisionBounds
+    if (aColl.yMin > bColl.yMax + eps) {
+        return int2(ai, boost_order_in_front(aj, ai))
+    }
+    if (bColl.yMin > aColl.yMax + eps) {
+        return int2(boost_order_in_front(ai, aj), aj)
+    }
+    let ay = entryA.groundY
+    let by = entryB.groundY
+    if (ay < by - eps) {
+        return int2(boost_order_in_front(ai, aj), aj)
+    }
+    if (by < ay - eps) {
+        return int2(ai, boost_order_in_front(aj, ai))
+    }
+    return int2(ai, aj)
+}
+
+
+def run_y_overlap_depth_pass(var entries : array<DepthSortEntry>) {
     let count = length(entries)
     if (count <= 1) {
         return
@@ -23,70 +53,79 @@ def run_collision_depth_pass(var entries : array<DepthSortEntry>) {
     let eps = COLLISION_DEPTH_Y_EPSILON
     for (i in range(count)) {
         for (j in range(i + 1, count)) {
-            if (!collision_y_bounds_overlap(entries[i].bounds, entries[j].bounds)) {
+            var ai = entries[i].order
+            var aj = entries[j].order
+            let iEntity = entries[i].isEntity
+            let jEntity = entries[j].isEntity
+            if ((iEntity && !jEntity) || (jEntity && !iEntity)) {
+                // Entity-vs-prop is fully defined by base order:
+                // entity uses legs collision yMin, prop uses collision yMax.
+                // No pairwise boost here to avoid edge artifacts from nearby props.
                 continue
+            } elif (iEntity && jEntity) {
+                if (!collision_y_ranges_overlap(entries[i].spriteBounds, entries[j].spriteBounds)) {
+                    continue
+                }
+                let resolved = resolve_entity_entity_pair(ai, aj, entries[i], entries[j], eps)
+                ai = resolved.x
+                aj = resolved.y
+            } else {
+                if (!collision_y_ranges_overlap(entries[i].spriteBounds, entries[j].spriteBounds)) {
+                    continue
+                }
+                let yi = entries[i].groundY
+                let yj = entries[j].groundY
+                if (yi < yj - eps) {
+                    ai = boost_order_in_front(ai, aj)
+                } elif (yj < yi - eps) {
+                    aj = boost_order_in_front(aj, ai)
+                }
             }
-            var ao = entries[i].order
-            var bo = entries[j].order
-            if (entries[i].bounds.yMin < entries[j].bounds.yMin - eps) {
-                ao = max(ao, bo + DEPTH_COLLISION_SORT_BIAS)
-            }
-            if (entries[i].bounds.yMax > entries[j].bounds.yMax + eps) {
-                bo = max(bo, ao + DEPTH_COLLISION_SORT_BIAS)
-            }
-            entries[i].order = ao
-            entries[j].order = bo
+            entries[i].order = ai
+            entries[j].order = aj
         }
     }
 }
 
 
-def entity_bounds_near_prop(entityBounds : CollisionYBounds; propBounds : CollisionYBounds) : bool {
-    return collision_y_bounds_overlap(
-        collision_y_bounds_expand(entityBounds, COLLISION_DEPTH_PROP_NEAR_MARGIN),
-        propBounds
-    )
-}
-
-
-def append_entity_depth_entry(
-    var entries : array<DepthSortEntry>;
-    node : NodeId;
-    feet : float2;
-    worldHeight : float
-) {
+def append_entity_depth_entry(var entries : array<DepthSortEntry>; node : NodeId; feet : float2; worldHeight : float) {
     if (!node.isAlive || node?.SpriteRenderer == null) {
         return
     }
-    let bounds = legs_collision_y_bounds(feet, worldHeight)
-    let baseOrder = depth_sort_entity_from_world(feet)
-    push(entries, DepthSortEntry(node = node, bounds = bounds, order = baseOrder))
+    let spriteBounds = sprite_node_collision_y_bounds(node)
+    let collisionBounds = legs_collision_y_bounds(feet, worldHeight)
+    let baseOrder = depth_sort_from_sprite_bottom(collisionBounds.yMin)
+    push(entries, DepthSortEntry(
+        node = node,
+        spriteBounds = spriteBounds,
+        collisionBounds = collisionBounds,
+        groundY = feet.y,
+        order = baseOrder,
+        isEntity = true
+    ))
 }
 
 
-def append_nearby_prop_depth_entries(var entries : array<DepthSortEntry>; entityBounds : array<CollisionYBounds>) {
-    for (i in range(length(propSpriteNodes))) {
-        if (i >= length(propCollisionBounds)) {
-            continue
-        }
-        let node = propSpriteNodes[i]
-        if (!node.isAlive || !node.isActive || node?.SpriteRenderer == null) {
-            continue
-        }
-        let propBounds = propCollisionBounds[i]
-        var nearEntity = false
-        for (eb in entityBounds) {
-            if (entity_bounds_near_prop(eb, propBounds)) {
-                nearEntity = true
-                break
-            }
-        }
-        if (!nearEntity) {
-            continue
-        }
-        let baseOrder = node?.SpriteRenderer.renderOrder
-        push(entries, DepthSortEntry(node = node, bounds = propBounds, order = baseOrder))
+def append_prop_depth_entry(var entries : array<DepthSortEntry>; propIndex : int; node : NodeId) {
+    if (!node.isAlive || !node.isActive || node?.SpriteRenderer == null) {
+        return
     }
+    let spriteBounds = sprite_node_collision_y_bounds(node)
+    let collisionBounds = prop_collision_bounds_at(propIndex, node)
+    let groundPos = prop_collision_sort_pos(propIndex, node)
+    let groundY = groundPos.y
+    var baseOrder = depth_sort_from_sprite_bottom(collisionBounds.yMax)
+    if (is_decor_border_wall_name(node.name)) {
+        baseOrder = border_wall_render_order_for_name(node.name, groundPos)
+    }
+    push(entries, DepthSortEntry(
+        node = node,
+        spriteBounds = spriteBounds,
+        collisionBounds = collisionBounds,
+        groundY = groundY,
+        order = baseOrder,
+        isEntity = false
+    ))
 }
 
 
@@ -106,11 +145,8 @@ def public update_collision_depth_sorting() {
     }
 
     var entries : array<DepthSortEntry>
-    var entityBounds : array<CollisionYBounds>
 
     if (playerNode.isAlive) {
-        let playerBounds = legs_collision_y_bounds(playerWorldPosition, PLAYER_WORLD_HEIGHT)
-        push(entityBounds, playerBounds)
         append_entity_depth_entry(entries, playerNode, playerWorldPosition, PLAYER_WORLD_HEIGHT)
     }
 
@@ -121,17 +157,15 @@ def public update_collision_depth_sorting() {
         }
         get_component(enemyNode) $(var ctrl : EnemyController?) {
             if (ctrl != null && !ctrl.dead) {
-                let enemyBounds = legs_collision_y_bounds(ctrl.position, ENEMY_WORLD_HEIGHT)
-                push(entityBounds, enemyBounds)
                 append_entity_depth_entry(entries, enemyNode, ctrl.position, ENEMY_WORLD_HEIGHT)
             }
         }
     }
 
-    append_nearby_prop_depth_entries(entries, entityBounds)
-
-    for (passIdx in range(COLLISION_DEPTH_SORT_PASSES)) {
-        run_collision_depth_pass(entries)
+    for (i in range(length(propSpriteNodes))) {
+        append_prop_depth_entry(entries, i, propSpriteNodes[i])
     }
+
+    run_y_overlap_depth_pass(entries)
     apply_depth_sort_entries(entries)
 }

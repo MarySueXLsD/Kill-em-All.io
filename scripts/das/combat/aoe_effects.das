@@ -14,7 +14,7 @@ let private PLAYER_AOE_KIND_ENERGETIC_FIRE = 1
 
 
 def public aoe_damage_hit_reach() : float {
-    return player_aoe_hit_radius() + ENTITY_FEET_RADIUS
+    return player_aoe_hit_radius() + entity_legs_collision_half_width(ENEMY_WORLD_HEIGHT)
 }
 
 
@@ -293,7 +293,7 @@ def public apply_enemy_aoe_hit_player(center, fromFeet : float2; damage : int) {
     if (damage <= 0 || playerHp <= 0 || playerDashing) {
         return
     }
-    let hitReach = player_aoe_hit_radius() + ENTITY_FEET_RADIUS
+    let hitReach = player_aoe_hit_radius() + entity_legs_collision_half_width(ENEMY_WORLD_HEIGHT)
     if (length_sq(playerWorldPosition - center) <= hitReach * hitReach) {
         queue_player_damage(damage, fromFeet)
     }

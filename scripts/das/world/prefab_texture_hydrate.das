@@ -5,7 +5,11 @@ require scripts/das/core/game_state
 module prefab_texture_hydrate public
 
 let public HEAP_LIMIT_BYTES = 104857600
-let public HEAP_SAFETY_MARGIN = 6000000
+// ~6% headroom below the Eden script heap cap (game loading may use up to ~94%).
+let public HEAP_SAFETY_MARGIN = 6291456
+// Book frames are fully pinned before game texture streaming starts.
+let public LOADING_ANIM_HEAP_RESERVE_BYTES = 0
+let public MAX_TEXTURE_LOADS_PER_FRAME_WHILE_LOADING = 8
 let public LARGE_DECODE_BYTES = 8388608
 let public SMALL_DECODE_BYTES = 524288
 let public MAX_TEXTURE_LOADS_PER_FRAME = 8
@@ -69,6 +73,20 @@ def public heap_bytes_used() : int {
 }
 
 
+def public loading_animation_heap_cap() : int {
+    return HEAP_LIMIT_BYTES - HEAP_SAFETY_MARGIN
+}
+
+
+def public effective_game_texture_heap_cap() : int {
+    let cap = loading_animation_heap_cap()
+    if (!gameReady) {
+        return cap - LOADING_ANIM_HEAP_RESERVE_BYTES
+    }
+    return cap
+}
+
+
 def estimated_decode_bytes(texPath : string) : int {
     if (is_character_texture_path(texPath)) {
         return LARGE_DECODE_BYTES
@@ -78,22 +96,29 @@ def estimated_decode_bytes(texPath : string) : int {
 
 
 def public memory_can_load_texture(texPath : string) : bool {
+    if (!gameReady && loadingBookBlocksGameLoads) {
+        return false
+    }
     let used = heap_bytes_used()
     let need = estimated_decode_bytes(texPath)
-    return used + need < HEAP_LIMIT_BYTES - HEAP_SAFETY_MARGIN
+    return used + need < effective_game_texture_heap_cap()
 }
 
 
 def compute_texture_load_budget() : int {
     let used = heap_bytes_used()
-    let room = HEAP_LIMIT_BYTES - HEAP_SAFETY_MARGIN - used
+    let room = effective_game_texture_heap_cap() - used
     if (room < SMALL_DECODE_BYTES) {
         return 0
     }
+    var budget = 1
     if (room >= LARGE_DECODE_BYTES + SMALL_DECODE_BYTES * 2) {
-        return MAX_TEXTURE_LOADS_PER_FRAME
+        budget = MAX_TEXTURE_LOADS_PER_FRAME
     }
-    return 1
+    if (!gameReady && budget > MAX_TEXTURE_LOADS_PER_FRAME_WHILE_LOADING) {
+        budget = MAX_TEXTURE_LOADS_PER_FRAME_WHILE_LOADING
+    }
+    return budget
 }
 
 

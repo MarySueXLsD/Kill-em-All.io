@@ -134,16 +134,16 @@ def build_map_cell_layers() -> dict[tuple[int, int], dict[str, str]]:
 
 
 def depth_sort_entity_from_grid(feet_gx: float, feet_gy: float) -> int:
-    max_sum = float(BASE_GRID_MIN_X + BASE_GRID_MIN_Y + BASE_GRID_WIDTH + BASE_GRID_HEIGHT - 2)
-    return DEPTH_ENTITY_LAYER + int((max_sum - (feet_gx + feet_gy)) * DEPTH_TILE_STRIDE)
+    min_sum = float(BASE_GRID_MIN_X + BASE_GRID_MIN_Y)
+    return DEPTH_ENTITY_LAYER + int(((feet_gx + feet_gy) - min_sum) * DEPTH_TILE_STRIDE)
 
 
 def depth_sort_foreground_overlay_order() -> int:
-    min_feet_sum = -0.5 + -0.5
+    min_sum = float(BASE_GRID_MIN_X + BASE_GRID_MIN_Y)
     max_sum = float(BASE_GRID_MIN_X + BASE_GRID_MIN_Y + BASE_GRID_WIDTH + BASE_GRID_HEIGHT - 2)
     return (
         DEPTH_ENTITY_LAYER
-        + int((max_sum - min_feet_sum) * DEPTH_TILE_STRIDE)
+        + int((max_sum - min_sum) * DEPTH_TILE_STRIDE)
         + DEPTH_FOREGROUND_OVERLAY_HEADROOM
     )
 

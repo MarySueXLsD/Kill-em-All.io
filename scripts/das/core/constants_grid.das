@@ -39,6 +39,10 @@ let public {
 
     // Depth sorting stride for tile layers and entity interleaving by screen Y.
     DEPTH_TILE_STRIDE = 100
+    // Finer steps within one grid cell so Y-sort does not tie and fall back to node Z.
+    DEPTH_ENTITY_SUBCELL = 10
+    // World-space sprite bottom Y -> renderOrder steps (lower yMin draws in front).
+    DEPTH_WORLD_Y_SORT_SCALE = 1000
 
     PLAYER_SPEED = 2.0
     PLAYER_RUN_SPEED_MULTIPLIER = 2.0
